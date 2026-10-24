@@ -1,0 +1,223 @@
+{
+  "version": "0.52",
+  "build": 36,
+  "scope": "presentation-only partial source; vehicle API and BLE protocols excluded",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 3355,
+      "sha256": "a262e77b79c1f620894cead22af1627c24e611b37a8c1e3bd115c105f5094d63",
+      "git_blob_sha": "568858e76ff362e2d9c8f20b9482ca9d75b23f73"
+    },
+    {
+      "path": "docs/DISCLAIMER.md",
+      "bytes": 3118,
+      "sha256": "0bc5ca0e388b6baf2151bdc262f722326173b2c98639c26b6972abe25d21a499",
+      "git_blob_sha": "b8841a60536f142b13f6ba3ce6a52167fb395768"
+    },
+    {
+      "path": "docs/INSTALL.md",
+      "bytes": 7261,
+      "sha256": "26450916b5a72a2d3eecfbe8ee64a192cb1b675187046fa689b003350cd5cd19",
+      "git_blob_sha": "ec697c96af701bf7d78b285faa9d66e84f5f6beb"
+    },
+    {
+      "path": "docs/SOURCE-SCOPE.md",
+      "bytes": 2543,
+      "sha256": "00fc5f2d15dd7577f48ea33193cc4c6af82ac9c84ae7325311c6e0963520c0f5",
+      "git_blob_sha": "c55681d3e473198bbbf32cc72570c92cb4cdb55e"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/AppIcon.appiconset/AppIcon.png",
+      "bytes": 946839,
+      "sha256": "0eb1a93df66cfae0cf3c5bb1be20aac72b7089172d00ac9c3e805342df521c47",
+      "git_blob_sha": "3f7decd741c2b06a0b1c63c576b53cb0723ed305"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "bytes": 203,
+      "sha256": "852920cb36e95beb53771138a4b8195a16fcce1cc31250632f246081cc638f9a",
+      "git_blob_sha": "7140563583a209df2e1515c4177e85428b7417f2"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/Contents.json",
+      "bytes": 60,
+      "sha256": "f5fb0e1f3a8142892ed092efb5955c1c2cc537003a89ad7bbdb9dade7fe8985f",
+      "git_blob_sha": "74d6a722cf39b2dd5bef11f166e6ac9b99568a01"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Almond.imageset/Contents.json",
+      "bytes": 151,
+      "sha256": "8bb138d7c5841b9a7a7c2dd7ff021b22641a5e19cf012312db7eeedf45c2e65d",
+      "git_blob_sha": "8d6b37fe9ce21f66ade4a9da79625555e283ddf1"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Almond.imageset/vehicle.png",
+      "bytes": 346202,
+      "sha256": "4b2eb8841382f4d34c89454ab4520b50b9e85fdf6a5c4bde05315f4e9d67116e",
+      "git_blob_sha": "3d41276f327878f03d611f4f7171092fc33ee43a"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Grey.imageset/Contents.json",
+      "bytes": 151,
+      "sha256": "8bb138d7c5841b9a7a7c2dd7ff021b22641a5e19cf012312db7eeedf45c2e65d",
+      "git_blob_sha": "8d6b37fe9ce21f66ade4a9da79625555e283ddf1"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Grey.imageset/vehicle.png",
+      "bytes": 317493,
+      "sha256": "e7d89a4d146b8cbdce3a1737068fc1f1d4903af8879ec8b9373bf699995e5ae5",
+      "git_blob_sha": "dc7826f0ebaad193374c8e93fa9f2ae9c5461587"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4IceBlue.imageset/Contents.json",
+      "bytes": 151,
+      "sha256": "8bb138d7c5841b9a7a7c2dd7ff021b22641a5e19cf012312db7eeedf45c2e65d",
+      "git_blob_sha": "8d6b37fe9ce21f66ade4a9da79625555e283ddf1"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4IceBlue.imageset/vehicle.png",
+      "bytes": 369162,
+      "sha256": "0444b369216d7aefada62f06e0147ea9ba85eb9921bef82e746b1249cc44db73",
+      "git_blob_sha": "05c2629ad3f9a9c610280f51c9f39440fae13e19"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Jade.imageset/Contents.json",
+      "bytes": 151,
+      "sha256": "8bb138d7c5841b9a7a7c2dd7ff021b22641a5e19cf012312db7eeedf45c2e65d",
+      "git_blob_sha": "8d6b37fe9ce21f66ade4a9da79625555e283ddf1"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Jade.imageset/vehicle.png",
+      "bytes": 347170,
+      "sha256": "a4997083bc807bc3c315f05b5d3538e111761a21b0badf69fb5f22e0c898f50d",
+      "git_blob_sha": "3da5444f0e0ee8d75e68c0c264aeb5fb56c9777c"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Purple.imageset/Contents.json",
+      "bytes": 151,
+      "sha256": "8bb138d7c5841b9a7a7c2dd7ff021b22641a5e19cf012312db7eeedf45c2e65d",
+      "git_blob_sha": "8d6b37fe9ce21f66ade4a9da79625555e283ddf1"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4Purple.imageset/vehicle.png",
+      "bytes": 352831,
+      "sha256": "d775f4483c211235ad4acbaba4c28df5955b97a1e3b5e54ebe629391644e6910",
+      "git_blob_sha": "0ac4d1907ce82d76d825284695eda8b5b24c7bdf"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4White.imageset/Contents.json",
+      "bytes": 151,
+      "sha256": "8bb138d7c5841b9a7a7c2dd7ff021b22641a5e19cf012312db7eeedf45c2e65d",
+      "git_blob_sha": "8d6b37fe9ce21f66ade4a9da79625555e283ddf1"
+    },
+    {
+      "path": "MGControl/Assets.xcassets/MG4White.imageset/vehicle.png",
+      "bytes": 322575,
+      "sha256": "6d6cf6ca0d4bce0074661e16101d0b15797d16c5148b0957083ba648ce31470e",
+      "git_blob_sha": "ac2c8959baf3fdc7faa0f68fb04d8be34328ade8"
+    },
+    {
+      "path": "MGControl/Views/VehicleControlComponents.swift",
+      "bytes": 8210,
+      "sha256": "d3d1d999694e01c62cfee360c1846b239c77244b5b2c10e1c0ae0dd03e5e0565",
+      "git_blob_sha": "e84dc0f23bf7f5180f9b027c2b9c004f78854ae1"
+    },
+    {
+      "path": "Preview/PreviewApp.swift",
+      "bytes": 1761,
+      "sha256": "650cb9e829d9c8b490227197b12a2ca0062faaedda401e66d5d83f8f167753f4",
+      "git_blob_sha": "8aa2279a594f066c6bff88b3eb5e58c12c0e7665"
+    },
+    {
+      "path": "project-preview.yml",
+      "bytes": 784,
+      "sha256": "184537a495c375a7c9930545a336d08b26b4155b7e942e4ebf07358695448ab9",
+      "git_blob_sha": "8575b0e7e1b6d07737b71f853e7cc1b81cf64196"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6501,
+      "sha256": "70d57bd793f6df8ef5e1c2d14a94408fe4d40dbb62f23eb823678a7316643202",
+      "git_blob_sha": "2b5da8d21e958dbc233722bcafce91fe7b608a78"
+    },
+    {
+      "path": "RELEASE-NOTES.md",
+      "bytes": 1592,
+      "sha256": "2d3ecc6aafe308d76312c3dbf8d1ec8e27b98a8bdc5c9b49363efb5dab444db3",
+      "git_blob_sha": "52115aff91b38333da454e173537e572eb4db2a4"
+    },
+    {
+      "path": "Shared/BLEMonitoringAttributes.swift",
+      "bytes": 3864,
+      "sha256": "46fbfdff6817ba8816330f3ff957afd2a7239978d6d550b3b0c5998e54455e4f",
+      "git_blob_sha": "82395fead027dae6822f5e885dba6e0cee5efd6c"
+    },
+    {
+      "path": "Shared/CarCard.swift",
+      "bytes": 5129,
+      "sha256": "954b035c51e5cf0c48207f74cf818b58c9c794878c1c7763f1d28ebb9e4a2d13",
+      "git_blob_sha": "17c8c529050aec22300312e23d059a0a16626c82"
+    },
+    {
+      "path": "Shared/CarLiveActivityView.swift",
+      "bytes": 2358,
+      "sha256": "14a3fed76f5c5b2270d8bc0d5860d36b9282ca30688b997dac04074ef243b318",
+      "git_blob_sha": "3caff6d4de2d5ff6f1fa2f2cc4feb93cfe6ac625"
+    },
+    {
+      "path": "Shared/CarSnapshot.swift",
+      "bytes": 2312,
+      "sha256": "5ff89a887e19032cc56c3f988a9351320c3c7e14cf3bac8efa79668c2785ca05",
+      "git_blob_sha": "ac4ba8a70902d31bf29a044e21dfb921d4b9634b"
+    },
+    {
+      "path": "Shared/SharedVehicleStore.swift",
+      "bytes": 1936,
+      "sha256": "a91fd0269480872a0b016ccfbb5ffe6731d5c4ae8d198a30030e3500d2eb3373",
+      "git_blob_sha": "66f0067b01d859587c92b2d004b0b913f2ad7a83"
+    },
+    {
+      "path": "Shared/VehicleAppearance.swift",
+      "bytes": 1538,
+      "sha256": "0491ff713c24f26a246d360b37dab408533114f25b893bc432822c013a605274",
+      "git_blob_sha": "72e8c633817703e82ca377f49d272361d7e70ebd"
+    },
+    {
+      "path": "Shared/VehicleAppearanceImage.swift",
+      "bytes": 259,
+      "sha256": "7b9109bbbca376e8278cca2dadfbe00fcd84b9622065a63e29ae92e8ccd1d879",
+      "git_blob_sha": "2f896d3189c6ca283be76cffe7e80e771c1bc977"
+    },
+    {
+      "path": "Shared/VehicleName.swift",
+      "bytes": 1017,
+      "sha256": "877ecaa744ee64992f84d6feaa48386d137b71a208f53acbae94c7389619e85e",
+      "git_blob_sha": "dbdc152ea6ab766554c195dcacce3641fe3b050d"
+    },
+    {
+      "path": "Shared/WidgetControlRoute.swift",
+      "bytes": 1142,
+      "sha256": "4465ffdd9b4dd169e5bb28508f93ed257ddb87832d0a6c0e66b8bd93e2c71c84",
+      "git_blob_sha": "13d7acf31029063f67730bb0aafb8dee0b46ed87"
+    },
+    {
+      "path": "Shared/WidgetLoadState.swift",
+      "bytes": 3162,
+      "sha256": "7da9d986a91919197056938efcff441e01a952d2f144c4c40b95c130fc76ac63",
+      "git_blob_sha": "086496db9d1fa5ae4ae7ff5969b77d75d0cc6c05"
+    },
+    {
+      "path": "Widget/BLEMonitoringLiveActivity.swift",
+      "bytes": 2331,
+      "sha256": "cf491c9a11cf0608a6ab810916fc1d85a2c4eb690f75ebf86d7867e3677b1d74",
+      "git_blob_sha": "d11408357512ecbd06a5c512844c92870c1c490f"
+    },
+    {
+      "path": "Widget/MGControlWidget.swift",
+      "bytes": 7482,
+      "sha256": "9e7c0e496eb5c56a110464ae56192c6cbbd187731f1e026ebc2f878a07c95421",
+      "git_blob_sha": "f511f871c7fba80f2c63fff53c2763d350896bbe"
+    }
+  ]
+}
