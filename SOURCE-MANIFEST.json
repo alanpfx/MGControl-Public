@@ -5,15 +5,15 @@
   "files": [
     {
       "path": "CHANGELOG.md",
-      "bytes": 3355,
-      "sha256": "a262e77b79c1f620894cead22af1627c24e611b37a8c1e3bd115c105f5094d63",
-      "git_blob_sha": "568858e76ff362e2d9c8f20b9482ca9d75b23f73"
+      "bytes": 3475,
+      "sha256": "17bbaae954b92c1eb979e60940b8338652a20334e4b3ab83422b6bf15303b3a1",
+      "git_blob_sha": "46cdb163d7bdf82a08c24a6f22036809305217b3"
     },
     {
       "path": "docs/DISCLAIMER.md",
-      "bytes": 3118,
-      "sha256": "0bc5ca0e388b6baf2151bdc262f722326173b2c98639c26b6972abe25d21a499",
-      "git_blob_sha": "b8841a60536f142b13f6ba3ce6a52167fb395768"
+      "bytes": 3488,
+      "sha256": "9d4c7738820f28f367bf6928a61f83f8a4255cc2ca7d05798c55660a8f87447b",
+      "git_blob_sha": "878ef1bb25c35f9a704c4257972e2e5a306c7e44"
     },
     {
       "path": "docs/INSTALL.md",
@@ -23,9 +23,15 @@
     },
     {
       "path": "docs/SOURCE-SCOPE.md",
-      "bytes": 2543,
-      "sha256": "00fc5f2d15dd7577f48ea33193cc4c6af82ac9c84ae7325311c6e0963520c0f5",
-      "git_blob_sha": "c55681d3e473198bbbf32cc72570c92cb4cdb55e"
+      "bytes": 2750,
+      "sha256": "af4d55d4ad6d16189bde1772e61ab48116639fa13997463fff24750bb8bf3012",
+      "git_blob_sha": "faf2eba49988af6740082c88cfb7b3b991d55141"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 4457,
+      "sha256": "f607328afffcba8396019cf41297ac001f9dd6669c58f1d63c5e72b133af46c9",
+      "git_blob_sha": "8aad28a9f5bbef51365301e834e9ca37eb7f1dbc"
     },
     {
       "path": "MGControl/Assets.xcassets/AppIcon.appiconset/AppIcon.png",
@@ -137,15 +143,15 @@
     },
     {
       "path": "README.md",
-      "bytes": 6501,
-      "sha256": "70d57bd793f6df8ef5e1c2d14a94408fe4d40dbb62f23eb823678a7316643202",
-      "git_blob_sha": "2b5da8d21e958dbc233722bcafce91fe7b608a78"
+      "bytes": 7009,
+      "sha256": "7a56f0275f91e0f4b98129bfd9348a4bf37a95559a585aed12ecc81e6f267a10",
+      "git_blob_sha": "410887f613878afc418ae40e57e1a9fa62ed1b85"
     },
     {
       "path": "RELEASE-NOTES.md",
-      "bytes": 1592,
-      "sha256": "2d3ecc6aafe308d76312c3dbf8d1ec8e27b98a8bdc5c9b49363efb5dab444db3",
-      "git_blob_sha": "52115aff91b38333da454e173537e572eb4db2a4"
+      "bytes": 1897,
+      "sha256": "49bbb7295a583c63c5250c27c961e4d7346a88088590b698b9c3b60973f0aae4",
+      "git_blob_sha": "320a9b370cab806080e0242e77fb81d9d1a42204"
     },
     {
       "path": "Shared/BLEMonitoringAttributes.swift",
