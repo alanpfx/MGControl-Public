@@ -1,0 +1,36 @@
+{
+  "name": "Publish reviewed MGControl 0.52 installers",
+  "on": {
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "paths": [
+        ".github/workflows/release-v052.yml"
+      ]
+    }
+  },
+  "permissions": {
+    "contents": "write"
+  },
+  "concurrency": {
+    "group": "mgcontrol-public-release-v052",
+    "cancel-in-progress": false
+  },
+  "jobs": {
+    "publish": {
+      "runs-on": "ubuntu-latest",
+      "timeout-minutes": 15,
+      "steps": [
+        {
+          "name": "Verify reviewed files and publish release",
+          "uses": "actions/github-script@v8",
+          "with": {
+            "script": "const crypto=require('crypto');\nconst files=[{\"path\": \"MGControl-V0.52-app-only-unsigned.ipa\", \"bytes\": 5011971, \"sha\": \"8ede047031ad589d0c193cb7fa1af8f8be95fc2e\", \"sha256\": \"67607da727aee0399eeae23f188043bfee194297bc08ec1894eaa6f451c2eac1\", \"blob\": \"8ede047031ad589d0c193cb7fa1af8f8be95fc2e\"}, {\"path\": \"MGControl-V0.52-widget-unsigned.ipa\", \"bytes\": 6346957, \"sha\": \"d2588a14165a4096055ca0dcdfdd18f457b83198\", \"sha256\": \"7803fe1a8cd82dc0c9ed1b8078937d5eb4409e7b55bbab05d27a0a13d9b16455\", \"blob\": \"d2588a14165a4096055ca0dcdfdd18f457b83198\"}];\nconst sourceTree='3ac2056fb8c33063e99180f01bc71c598413138a';\nif(context.repo.owner!=='alanpfx' || context.repo.repo!=='MGControl-Public')throw new Error('Wrong repository');\nconst head=(await github.rest.git.getRef({...context.repo,ref:'heads/main'})).data.object.sha;\nif(head!==context.sha)throw new Error('Main changed; refusing to overwrite user changes');\nconst tree=(await github.rest.git.getTree({...context.repo,tree_sha:sourceTree,recursive:'true'})).data;\nif(tree.truncated || tree.tree.filter(x=>x.type==='blob').length!==37)throw new Error('Unexpected source snapshot');\nfor(const entry of tree.tree){if(/Services\\/|MGControlTests\\/|^\\.github\\/|\\.har$|\\.chlz$/.test(entry.path))throw new Error('Excluded source file');}\nconst assets=[];\nfor(const f of files){\n const blob=(await github.rest.git.getBlob({...context.repo,file_sha:f.blob})).data;\n if(blob.encoding!=='base64')throw new Error('Unexpected binary encoding');\n const bytes=Buffer.from(blob.content,'base64');\n if(bytes.length!==f.bytes || crypto.createHash('sha256').update(bytes).digest('hex')!==f.sha256)throw new Error('Installer verification failed');\n assets.push({name:f.path,bytes});\n}\nlet previous;try{previous=(await github.rest.repos.getReleaseByTag({...context.repo,tag:'v0.52'})).data;}catch(e){if(e.status!==404)throw e;}\nif(previous)throw new Error('Release exists; refusing to overwrite');\nconst clean=(await github.rest.git.createCommit({...context.repo,message:'Keep only reviewed public source and documentation on main',tree:sourceTree,parents:[head]})).data;\nawait github.rest.git.updateRef({...context.repo,ref:'heads/main',sha:clean.sha,force:false});\nconst noteEntry=tree.tree.find(x=>x.path==='RELEASE-NOTES.md');\nconst noteBlob=(await github.rest.git.getBlob({...context.repo,file_sha:noteEntry.sha})).data;\nconst newline=String.fromCharCode(10);\nconst body=Buffer.from(noteBlob.content,'base64').toString('utf8')+newline+newline+'[项目说明](https://github.com/alanpfx/MGControl-Public) · [安装与使用](https://github.com/alanpfx/MGControl-Public/blob/main/docs/INSTALL.md) · [免责声明](https://github.com/alanpfx/MGControl-Public/blob/main/docs/DISCLAIMER.md)';\nconst release=(await github.rest.repos.createRelease({...context.repo,tag_name:'v0.52',target_commitish:clean.sha,name:'MGControl 0.52（36）测试版',body,draft:true,prerelease:true,generate_release_notes:false})).data;\nconst sums=Buffer.from(files.map(f=>f.sha256+'  '+f.path).join(newline)+newline,'utf8');\nassets.push({name:'SHA256SUMS.txt',bytes:sums});\nfor(const asset of assets){\n const uploaded=(await github.rest.repos.uploadReleaseAsset({...context.repo,release_id:release.id,name:asset.name,data:asset.bytes,headers:{'content-type':'application/octet-stream','content-length':asset.bytes.length}})).data;\n const digest='sha256:'+crypto.createHash('sha256').update(asset.bytes).digest('hex');\n if(uploaded.size!==asset.bytes.length || (uploaded.digest && uploaded.digest!==digest))throw new Error('Uploaded asset mismatch');\n}\nconst published=(await github.rest.repos.updateRelease({...context.repo,release_id:release.id,draft:false,prerelease:true,make_latest:'false'})).data;\ncore.info('Published '+published.html_url);\ncore.info('Main and release tag contain the exact 37-file reviewed source snapshot.');\n"
+          }
+        }
+      ]
+    }
+  }
+}
+
