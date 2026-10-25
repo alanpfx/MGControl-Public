@@ -1,0 +1,35 @@
+{
+  "name": "Publish verified MGControl 0.54 installers",
+  "on": {
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "paths": [
+        ".github/workflows/release-v054.yml"
+      ]
+    }
+  },
+  "permissions": {
+    "contents": "write"
+  },
+  "concurrency": {
+    "group": "mgcontrol-public-release-v054",
+    "cancel-in-progress": false
+  },
+  "jobs": {
+    "publish": {
+      "runs-on": "ubuntu-latest",
+      "timeout-minutes": 15,
+      "steps": [
+        {
+          "name": "Verify installers and publish 0.54",
+          "uses": "actions/github-script@v8",
+          "with": {
+            "script": "const crypto=require('crypto');\nconst files=[{\"path\":\"MGControl-V0.54-app-only-ready-unsigned.ipa\",\"bytes\":5033796,\"sha256\":\"89e6ca0c5905d44cdbea06715196a7c9b82f54e439a02596ee93f2155c11448d\",\"git_blob_sha\":\"0ead882f022e1468469f24d4291d230a85097a8f\",\"blob\":\"0ead882f022e1468469f24d4291d230a85097a8f\"},{\"path\":\"MGControl-V0.54-widget-ready-unsigned.ipa\",\"bytes\":6378339,\"sha256\":\"db4a85adc4c411388abb09697434e22ecee514d46df2b7c65d45a08d68196305\",\"git_blob_sha\":\"6f3cc38ebc65b382a3d6cd8f7281e267da1dcd3f\",\"blob\":\"6f3cc38ebc65b382a3d6cd8f7281e267da1dcd3f\"}];\nconst sourceTree='cfedb181caeb9cdf529cb4a7002a0a49bffc58f1';\nif(context.repo.owner!=='alanpfx'||context.repo.repo!=='MGControl-Public')throw Error('Wrong repository');\nconst head=(await github.rest.git.getRef({...context.repo,ref:'heads/main'})).data.object.sha;\nif(head!==context.sha)throw Error('Main changed; refusing overwrite');\nconst tree=(await github.rest.git.getTree({...context.repo,tree_sha:sourceTree,recursive:'true'})).data;\nif(tree.truncated||tree.tree.filter(x=>x.type==='blob').length!==38)throw Error('Unexpected public source snapshot');\nfor(const entry of tree.tree){if(entry.path.includes('Services/')||entry.path.includes('MGControlTests/')||entry.path.startsWith('.github/')||entry.path.endsWith('.har')||entry.path.endsWith('.chlz')||entry.path.endsWith('.ipa'))throw Error('Excluded source file');}\nconst assets=[];\nfor(const f of files){\n const blob=(await github.rest.git.getBlob({...context.repo,file_sha:f.blob})).data;\n const bytes=Buffer.from(blob.content,'base64');\n if(blob.encoding!=='base64'||bytes.length!==f.bytes||crypto.createHash('sha256').update(bytes).digest('hex')!==f.sha256)throw Error('Installer verification failed');\n assets.push({name:f.path,bytes});\n}\nconst getText=async path=>{\n const entry=tree.tree.find(x=>x.path===path);if(!entry)throw Error('Missing documentation');\n const blob=(await github.rest.git.getBlob({...context.repo,file_sha:entry.sha})).data;\n return Buffer.from(blob.content,'base64');\n};\nconst body=(await getText('RELEASE-NOTES.md')).toString('utf8');\nassets.push({name:'LICENSE.txt',bytes:await getText('LICENSE')});\nconst newline=String.fromCharCode(10);\nassets.push({name:'SHA256SUMS.txt',bytes:Buffer.from(files.map(f=>f.sha256+'  '+f.path).join(newline)+newline,'utf8')});\nlet previous;try{previous=(await github.rest.repos.getReleaseByTag({...context.repo,tag:'v0.54'})).data;}catch(e){if(e.status!==404)throw e;}\nif(previous)throw Error('Release exists; refusing overwrite');\nconst clean=(await github.rest.git.createCommit({...context.repo,message:'Document 0.54 iOS 15 compatibility and first-login configuration',tree:sourceTree,parents:[head]})).data;\nawait github.rest.git.updateRef({...context.repo,ref:'heads/main',sha:clean.sha,force:false});\nconst release=(await github.rest.repos.createRelease({...context.repo,tag_name:'v0.54',target_commitish:clean.sha,name:'MGControl 0.54（38）· iOS 15 兼容测试版',body,draft:true,prerelease:true,generate_release_notes:false})).data;\nfor(const asset of assets){\n const uploaded=(await github.rest.repos.uploadReleaseAsset({...context.repo,release_id:release.id,name:asset.name,data:asset.bytes,headers:{'content-type':'application/octet-stream','content-length':asset.bytes.length}})).data;\n const digest='sha256:'+crypto.createHash('sha256').update(asset.bytes).digest('hex');\n if(uploaded.size!==asset.bytes.length||(uploaded.digest&&uploaded.digest!==digest))throw Error('Uploaded asset mismatch');\n}\nconst published=(await github.rest.repos.updateRelease({...context.repo,release_id:release.id,draft:false,prerelease:true,make_latest:'false'})).data;\ncore.info('Published '+published.html_url);\ncore.info('Verified two IPA installers, checksum file and noncommercial license; public source exclusions retained.');\n"
+          }
+        }
+      ]
+    }
+  }
+}

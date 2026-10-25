@@ -1,31 +1,33 @@
 {
   "version": "0.52",
   "build": 36,
+  "release_documentation_version": "0.54",
+  "release_documentation_build": 38,
   "scope": "presentation-only partial source; vehicle API and BLE protocols excluded",
   "files": [
     {
       "path": "CHANGELOG.md",
-      "bytes": 3475,
-      "sha256": "17bbaae954b92c1eb979e60940b8338652a20334e4b3ab83422b6bf15303b3a1",
-      "git_blob_sha": "46cdb163d7bdf82a08c24a6f22036809305217b3"
+      "bytes": 5015,
+      "sha256": "072f944b576b2a137715839091e657287133a2dd69a55e74e920c50b0cf1a7cd",
+      "git_blob_sha": "5b4ecfd12a91d592366fc10663b1b520ae4e565a"
     },
     {
       "path": "docs/DISCLAIMER.md",
       "bytes": 3488,
-      "sha256": "9d4c7738820f28f367bf6928a61f83f8a4255cc2ca7d05798c55660a8f87447b",
-      "git_blob_sha": "878ef1bb25c35f9a704c4257972e2e5a306c7e44"
+      "sha256": "05d6ce76e528a776e9888c4a9be7339972f89eea9a8d0d3177409165b00d8d59",
+      "git_blob_sha": "06dd123448ab7eae227bb3f3ff13f5f8ed3eca3f"
     },
     {
       "path": "docs/INSTALL.md",
-      "bytes": 7261,
-      "sha256": "26450916b5a72a2d3eecfbe8ee64a192cb1b675187046fa689b003350cd5cd19",
-      "git_blob_sha": "ec697c96af701bf7d78b285faa9d66e84f5f6beb"
+      "bytes": 7526,
+      "sha256": "36c9c635748b432c4a04c3447408e04b686e4de485846ab618c62c9111305adf",
+      "git_blob_sha": "106120b552337e8cc51f53f6b2e522bc0e4a02ae"
     },
     {
       "path": "docs/SOURCE-SCOPE.md",
-      "bytes": 2750,
-      "sha256": "af4d55d4ad6d16189bde1772e61ab48116639fa13997463fff24750bb8bf3012",
-      "git_blob_sha": "faf2eba49988af6740082c88cfb7b3b991d55141"
+      "bytes": 3282,
+      "sha256": "1412ad54d55bd0e70b7f778a3aa84e3fd329c9ccf664278a19e805fa4adea34f",
+      "git_blob_sha": "356134b150bbd04cbc02eed2577ea87729f58962"
     },
     {
       "path": "LICENSE",
@@ -35,9 +37,9 @@
     },
     {
       "path": "MGControl/Assets.xcassets/AppIcon.appiconset/AppIcon.png",
-      "bytes": 946839,
-      "sha256": "0eb1a93df66cfae0cf3c5bb1be20aac72b7089172d00ac9c3e805342df521c47",
-      "git_blob_sha": "3f7decd741c2b06a0b1c63c576b53cb0723ed305"
+      "bytes": 946826,
+      "sha256": "558ddc89dd6c8721e21251b69e9703baf847a2fdb0d4bf9ae3030a9984d54349",
+      "git_blob_sha": "af132c2c08ececef2ab2ab791cb1dfff912644b8"
     },
     {
       "path": "MGControl/Assets.xcassets/AppIcon.appiconset/Contents.json",
@@ -59,9 +61,9 @@
     },
     {
       "path": "MGControl/Assets.xcassets/MG4Almond.imageset/vehicle.png",
-      "bytes": 346202,
-      "sha256": "4b2eb8841382f4d34c89454ab4520b50b9e85fdf6a5c4bde05315f4e9d67116e",
-      "git_blob_sha": "3d41276f327878f03d611f4f7171092fc33ee43a"
+      "bytes": 346197,
+      "sha256": "60cb0d5171156ee3b915fe06e1b3f35f239c613fcdc09511750ba8245b50b810",
+      "git_blob_sha": "06e362daed0e549efe1ef7893d87a1fa3d175abb"
     },
     {
       "path": "MGControl/Assets.xcassets/MG4Grey.imageset/Contents.json",
@@ -71,9 +73,9 @@
     },
     {
       "path": "MGControl/Assets.xcassets/MG4Grey.imageset/vehicle.png",
-      "bytes": 317493,
-      "sha256": "e7d89a4d146b8cbdce3a1737068fc1f1d4903af8879ec8b9373bf699995e5ae5",
-      "git_blob_sha": "dc7826f0ebaad193374c8e93fa9f2ae9c5461587"
+      "bytes": 317490,
+      "sha256": "ebcf0fbc497bd195df136e2ec0b3a89ad628509c415b78d34d052c4b4e18e986",
+      "git_blob_sha": "df3f913e71f2cee855d50c4aa869be7cc7662592"
     },
     {
       "path": "MGControl/Assets.xcassets/MG4IceBlue.imageset/Contents.json",
@@ -83,9 +85,9 @@
     },
     {
       "path": "MGControl/Assets.xcassets/MG4IceBlue.imageset/vehicle.png",
-      "bytes": 369162,
-      "sha256": "0444b369216d7aefada62f06e0147ea9ba85eb9921bef82e746b1249cc44db73",
-      "git_blob_sha": "05c2629ad3f9a9c610280f51c9f39440fae13e19"
+      "bytes": 369157,
+      "sha256": "db87dd4b91621e2ba06e14c3ecafab08718991844d8ec17a47f8adef26f8d4c6",
+      "git_blob_sha": "27309cc8c2547061b61be222dfbc3cf0519d4102"
     },
     {
       "path": "MGControl/Assets.xcassets/MG4Jade.imageset/Contents.json",
@@ -95,9 +97,9 @@
     },
     {
       "path": "MGControl/Assets.xcassets/MG4Jade.imageset/vehicle.png",
-      "bytes": 347170,
-      "sha256": "a4997083bc807bc3c315f05b5d3538e111761a21b0badf69fb5f22e0c898f50d",
-      "git_blob_sha": "3da5444f0e0ee8d75e68c0c264aeb5fb56c9777c"
+      "bytes": 347165,
+      "sha256": "dffed1d5b3a4b96dac51f0178f9d004d6ad050a5b9da01035e9a90ad3875c943",
+      "git_blob_sha": "a1f85755b01906ac0cb1444dd50323f17167e871"
     },
     {
       "path": "MGControl/Assets.xcassets/MG4Purple.imageset/Contents.json",
@@ -107,9 +109,9 @@
     },
     {
       "path": "MGControl/Assets.xcassets/MG4Purple.imageset/vehicle.png",
-      "bytes": 352831,
-      "sha256": "d775f4483c211235ad4acbaba4c28df5955b97a1e3b5e54ebe629391644e6910",
-      "git_blob_sha": "0ac4d1907ce82d76d825284695eda8b5b24c7bdf"
+      "bytes": 352827,
+      "sha256": "c61484e3df1441dba8c60a774830df640e124f25c74545b0c70a1792e7f359a9",
+      "git_blob_sha": "9a9b4d18065f37a8aa934403970aead3b8bf8d87"
     },
     {
       "path": "MGControl/Assets.xcassets/MG4White.imageset/Contents.json",
@@ -119,9 +121,9 @@
     },
     {
       "path": "MGControl/Assets.xcassets/MG4White.imageset/vehicle.png",
-      "bytes": 322575,
-      "sha256": "6d6cf6ca0d4bce0074661e16101d0b15797d16c5148b0957083ba648ce31470e",
-      "git_blob_sha": "ac2c8959baf3fdc7faa0f68fb04d8be34328ade8"
+      "bytes": 322567,
+      "sha256": "98aaeea8f4e380199ed58be07ce818fc4e94d86db44ad54503a95ed01bf5138e",
+      "git_blob_sha": "f13397526abf83b8df3448fc4cd8a28fcd14659a"
     },
     {
       "path": "MGControl/Views/VehicleControlComponents.swift",
@@ -143,15 +145,15 @@
     },
     {
       "path": "README.md",
-      "bytes": 7009,
-      "sha256": "7a56f0275f91e0f4b98129bfd9348a4bf37a95559a585aed12ecc81e6f267a10",
-      "git_blob_sha": "410887f613878afc418ae40e57e1a9fa62ed1b85"
+      "bytes": 7104,
+      "sha256": "df4cb7f5eb3e57c2b9d38d0a48a7d26f175fe840ef7275737391f8369925bc0b",
+      "git_blob_sha": "c7c93754015b704f90aed22fa922af4d0f36c8ab"
     },
     {
       "path": "RELEASE-NOTES.md",
-      "bytes": 1897,
-      "sha256": "49bbb7295a583c63c5250c27c961e4d7346a88088590b698b9c3b60973f0aae4",
-      "git_blob_sha": "320a9b370cab806080e0242e77fb81d9d1a42204"
+      "bytes": 2587,
+      "sha256": "156f49cea9f0d824c9f60c2803da6dba2ab3d65adf214efc06205198efcb7844",
+      "git_blob_sha": "1ac1fd88f2cdc5b181747eda6976fd74ea017353"
     },
     {
       "path": "Shared/BLEMonitoringAttributes.swift",
