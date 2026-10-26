@@ -1,0 +1,85 @@
+{
+  "name": "Build MGControl from private source",
+  "on": {
+    "workflow_dispatch": {}
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "concurrency": {
+    "group": "mgcontrol-private-source-build",
+    "cancel-in-progress": false
+  },
+  "jobs": {
+    "build": {
+      "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/main' && github.actor == 'alanpfx'",
+      "runs-on": "macos-15",
+      "timeout-minutes": 40,
+      "env": {
+        "DEVELOPER_DIR": "/Applications/Xcode_16.4.app/Contents/Developer"
+      },
+      "steps": [
+        {
+          "name": "Check private source credential",
+          "env": {
+            "SOURCE_TOKEN": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}"
+          },
+          "shell": "bash",
+          "run": "if [ -z \"$SOURCE_TOKEN\" ]; then echo \"::error::Configure MGCONTROL_SOURCE_TOKEN with read-only Contents access to MGControl.\"; exit 1; fi"
+        },
+        {
+          "name": "Read public build support",
+          "uses": "actions/checkout@v6",
+          "with": {
+            "persist-credentials": false,
+            "path": "public-build"
+          }
+        },
+        {
+          "name": "Read pinned private source",
+          "uses": "actions/checkout@v6",
+          "with": {
+            "repository": "alanpfx/MGControl",
+            "ref": "401a52d5f0ddba853b1aba44f139e9057e733f63",
+            "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
+            "persist-credentials": false,
+            "path": "_private/source",
+            "fetch-depth": 1
+          }
+        },
+        {
+          "name": "Test and build without exposing source logs",
+          "shell": "bash",
+          "run": "bash public-build/build-support/build.sh"
+        },
+        {
+          "name": "Upload verified unsigned installers",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "MGControl-0.56-unsigned",
+            "path": "public-output/installers/",
+            "if-no-files-found": "error",
+            "retention-days": 7
+          }
+        },
+        {
+          "name": "Encrypt build diagnostics",
+          "if": "always()",
+          "shell": "bash",
+          "run": "bash public-build/build-support/encrypt-diagnostics.sh"
+        },
+        {
+          "name": "Upload encrypted diagnostics",
+          "if": "always()",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "MGControl-0.56-encrypted-diagnostics",
+            "path": "public-output/diagnostics/build-logs.p7m",
+            "if-no-files-found": "ignore",
+            "retention-days": 3
+          }
+        }
+      ]
+    }
+  }
+}
