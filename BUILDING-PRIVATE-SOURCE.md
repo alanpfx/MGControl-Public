@@ -10,7 +10,7 @@
 4. 将凭证直接保存到 **MGControl-Public** → Settings → Secrets and variables → Actions → New repository secret，名称为 `MGCONTROL_SOURCE_TOKEN`。不要发送到聊天、提交到源码或放入 Variables。
 5. 本仓库 Actions → Build MGControl from private source → Run workflow，选择 `main` 并运行。
 
-工作流固定读取经过审查的私有源码提交 `401a52d5f0ddba853b1aba44f139e9057e733f63`（0.56 / 40），只允许所有者在本仓库 main 手动触发，或由所有者更新此工作流文件触发。更新版本时须审查并修改固定提交与版本检查。没有 pull_request / pull_request_target / 外部代码触发入口。
+工作流固定读取经过审查的私有源码提交 `84be10de4e02b654276d3db67d5d8e747443ca7a`（0.57 / 41），只允许所有者在本仓库 main 手动触发，或由所有者更新此工作流文件触发。更新版本时须审查并修改固定提交与版本检查。没有 pull_request / pull_request_target / 外部代码触发入口。
 
 ## 产物与日志
 

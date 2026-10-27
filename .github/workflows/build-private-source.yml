@@ -48,7 +48,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "401a52d5f0ddba853b1aba44f139e9057e733f63",
+            "ref": "84be10de4e02b654276d3db67d5d8e747443ca7a",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
@@ -64,7 +64,7 @@
           "name": "Upload verified unsigned installers",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.56-unsigned",
+            "name": "MGControl-0.57-unsigned",
             "path": "public-output/installers/",
             "if-no-files-found": "error",
             "retention-days": 7
@@ -81,7 +81,7 @@
           "if": "always()",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.56-encrypted-diagnostics",
+            "name": "MGControl-0.57-encrypted-diagnostics",
             "path": "public-output/diagnostics/build-logs.p7m",
             "if-no-files-found": "ignore",
             "retention-days": 3
@@ -91,4 +91,3 @@
     }
   }
 }
-

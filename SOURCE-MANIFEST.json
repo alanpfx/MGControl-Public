@@ -1,15 +1,15 @@
 {
   "version": "0.52",
   "build": 36,
-  "release_documentation_version": "0.56",
-  "release_documentation_build": 40,
+  "release_documentation_version": "0.57",
+  "release_documentation_build": 41,
   "scope": "presentation-only source plus public build/release support; vehicle API and BLE implementations excluded",
   "files": [
     {
       "path": ".github/workflows/build-private-source.yml",
       "bytes": 2907,
-      "sha256": "774766f936f6d2f5cc6486aa7df319bdb8dfca13b4e6b8225fd4d6eceb8dc2b4",
-      "git_blob_sha": "dfcd69a0d5be28f496b628d782b22b1d7dc9e6ef"
+      "sha256": "a462c0264bfbdd2a0831695ee4cf0231c09ceda846ddea34cb1430fbc7895462",
+      "git_blob_sha": "ed3851b620af51b8a90054f5eb904e886abf7bad"
     },
     {
       "path": ".github/workflows/publish-ipa.yml",
@@ -37,9 +37,9 @@
     },
     {
       "path": "build-support/export-installers.py",
-      "bytes": 1446,
-      "sha256": "835ed78f78846de7110cc9312b7fcaa73f377133a8a1d63aa647bd9402aa05ea",
-      "git_blob_sha": "b191374a12253047d5b723b28ea7490a2bc7434e"
+      "bytes": 1468,
+      "sha256": "682c04153ed1d9e318d136d96e5eb8b0859019992ec3c5f2b3ba0374dfb17ab6",
+      "git_blob_sha": "b4486a1efe0f713e3dc850d31d57b726955740a8"
     },
     {
       "path": "build-support/publish-installers.py",
@@ -50,14 +50,14 @@
     {
       "path": "BUILDING-PRIVATE-SOURCE.md",
       "bytes": 3067,
-      "sha256": "935e7ca596c80374909a80e9c1a07925eb5b0694a4b00026d18878f058244783",
-      "git_blob_sha": "4f0f8c826f25b7673c411f8c8be74e059292d864"
+      "sha256": "1b3acd47b2f18ff31158c0d3c33c7ff84fc24be3cb709492e97c9301730af12a",
+      "git_blob_sha": "72a07472aaf1662280c03c47d920575bcc29e615"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 6310,
-      "sha256": "4ecc33cb55d0c2b91b3864022ff1818c19a46c593702e2643f43ac2248a25f13",
-      "git_blob_sha": "89d3f12e252a19c5ac8a169810019e17c4a2b3a7"
+      "bytes": 7183,
+      "sha256": "a24fdbcebc62349dcefe1b33beb40f9002d91aea967e60b9f0ce7b084644ed5a",
+      "git_blob_sha": "b19c4a460a0231790823f9449758ee8c6cfe0280"
     },
     {
       "path": "docs/DISCLAIMER.md",
@@ -68,8 +68,8 @@
     {
       "path": "docs/INSTALL.md",
       "bytes": 7611,
-      "sha256": "0b6b4f5d20f30c7158edc25c75cbd8b1a635de128d898026a59c09a6983e526a",
-      "git_blob_sha": "2531bbfe345087756ad4848327ba96d1bd7233ea"
+      "sha256": "bc1d99ed652ec9c61f10dee264926c3bbad19252f6635cd3e655d2193bb0813d",
+      "git_blob_sha": "4b25fccd397b673e44407dbdff042fe468f7f8c0"
     },
     {
       "path": "docs/SOURCE-SCOPE.md",
@@ -193,15 +193,15 @@
     },
     {
       "path": "README.md",
-      "bytes": 7581,
-      "sha256": "0232da101622109a5db7fb088389936f4872ec07a3b5b40dbac34b1d3171e6b5",
-      "git_blob_sha": "086cf8cd050da50104c6ce8cb7b67337d6af0ecc"
+      "bytes": 7668,
+      "sha256": "50d583c0377e87bff661b553166370f060079aa0237d938fe25d4d65b2c18c2d",
+      "git_blob_sha": "d4ebaa6f3fab12e9e2b64997a3c26336c8c6caf8"
     },
     {
       "path": "RELEASE-NOTES.md",
-      "bytes": 2484,
-      "sha256": "e6638a6b5db27d0fc63a41bb289e14fe5f487d39cd045fccbd770bd1824a2b27",
-      "git_blob_sha": "29d18e52970e51840454035f0b1c48c9ad174390"
+      "bytes": 2641,
+      "sha256": "f11cd1bd42e8c672649d18ee22bf78884e00a11cad47aaf51b3ac3dbdff949bb",
+      "git_blob_sha": "0783650edc26b0700f9dabe0e766a525f657b0a8"
     },
     {
       "path": "Shared/BLEMonitoringAttributes.swift",
@@ -275,5 +275,6 @@
       "sha256": "9e7c0e496eb5c56a110464ae56192c6cbbd187731f1e026ebc2f878a07c95421",
       "git_blob_sha": "f511f871c7fba80f2c63fff53c2763d350896bbe"
     }
-  ]
+  ],
+  "generated_release_manifests": "release-manifests/ contains generated publication proofs, maintained separately"
 }

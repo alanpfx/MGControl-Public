@@ -12,10 +12,10 @@ for variant in ('widget','app-only'):
    if Path(name).suffix.lower() in {'.swift','.h','.m','.mm','.c','.cpp','.har','.chlz','.pem','.key'}:raise RuntimeError('Excluded source or credential file in installer')
    if not name.startswith('Payload/'):raise RuntimeError('Unexpected installer root')
   info=plistlib.loads(z.read('Payload/MGControl.app/Info.plist'))
-  if info['CFBundleShortVersionString']!='0.56' or info['CFBundleVersion']!='40':raise RuntimeError('Unexpected application version')
+  if info['CFBundleShortVersionString']!='0.57' or info['CFBundleVersion']!='41':raise RuntimeError('Unexpected application version')
   if info['MinimumOSVersion']!='15.0':raise RuntimeError('Unexpected minimum OS')
   if 'Payload/MGControl.app/embedded.mobileprovision' in z.namelist():raise RuntimeError('Expected unsigned installer')
- name=f'MGControl-V0.56-{variant}-unsigned.ipa'
+ name=f'MGControl-V0.57-{variant}-unsigned.ipa'
  shutil.copyfile(p,out/name)
  checks.append(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+name)
 (out/'SHA256SUMS.txt').write_text('\n'.join(checks)+'\n',encoding='utf8')
