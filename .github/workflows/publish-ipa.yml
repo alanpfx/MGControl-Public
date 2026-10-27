@@ -1,0 +1,81 @@
+{
+  "name": "Publish successful MGControl installers",
+  "on": {
+    "workflow_run": {
+      "workflows": [
+        "Build MGControl from private source"
+      ],
+      "types": [
+        "completed"
+      ]
+    },
+    "workflow_dispatch": {
+      "inputs": {
+        "run_id": {
+          "description": "Successful public build run ID",
+          "required": true,
+          "default": "40336976388"
+        }
+      }
+    },
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "paths": [
+        ".github/workflows/publish-ipa.yml"
+      ]
+    }
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "concurrency": {
+    "group": "mgcontrol-release-publish",
+    "cancel-in-progress": false
+  },
+  "jobs": {
+    "publish": {
+      "if": "github.repository == 'alanpfx/MGControl-Public' && github.actor == 'alanpfx' && (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'alanpfx/MGControl-Public'))",
+      "runs-on": "ubuntu-latest",
+      "timeout-minutes": 15,
+      "permissions": {
+        "contents": "write",
+        "actions": "read"
+      },
+      "env": {
+        "BUILD_RUN_ID": "${{ github.event.workflow_run.id || inputs.run_id || '40336976388' }}"
+      },
+      "steps": [
+        {
+          "name": "Read trusted public release support",
+          "uses": "actions/checkout@v6",
+          "with": {
+            "ref": "main",
+            "persist-credentials": false,
+            "path": "public-build"
+          }
+        },
+        {
+          "name": "Read successful build artifacts",
+          "uses": "actions/download-artifact@v4",
+          "with": {
+            "pattern": "MGControl-*-unsigned",
+            "merge-multiple": true,
+            "path": "compiled",
+            "run-id": "${{ env.BUILD_RUN_ID }}",
+            "github-token": "${{ github.token }}"
+          }
+        },
+        {
+          "name": "Verify package and publish versioned release",
+          "env": {
+            "GH_TOKEN": "${{ github.token }}",
+            "INSTALLER_DIRECTORY": "compiled"
+          },
+          "run": "python3 public-build/build-support/publish-installers.py"
+        }
+      ]
+    }
+  }
+}

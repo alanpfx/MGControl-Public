@@ -11,12 +11,12 @@ iOS 15 保留车况、远控、蓝牙钥匙和桌面小组件；实时活动在 
 
 ## 2. 下载并签名
 
-到 [v0.54 Release](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.54) 下载：
+到 [v0.56 Release](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.56) 下载：
 
 | 文件 | 适用情况 |
 | --- | --- |
-| `MGControl-V0.54-widget-ready-unsigned.ipa` | 主 App 和桌面小组件；签名工具需同时正确处理 App、扩展和 App Groups |
-| `MGControl-V0.54-app-only-ready-unsigned.ipa` | 不含桌面小组件的兼容安装包；签名环境不支持共享组时使用 |
+| `MGControl-V0.56-widget-ready-unsigned.ipa` | 主 App 和桌面小组件；签名工具需同时正确处理 App、扩展和 App Groups |
+| `MGControl-V0.56-app-only-ready-unsigned.ipa` | 不含桌面小组件的兼容安装包；签名环境不支持共享组时使用 |
 | `SHA256SUMS.txt` | 安装包完整性校验值 |
 
 两种 IPA 都未签名，不能直接点击安装。使用你自己的合法开发签名或合适的设备管理方式完成签名。项目不提供苹果证书、签名账号或付费安装服务。
