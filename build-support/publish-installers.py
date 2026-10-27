@@ -24,6 +24,11 @@ assert run['path']=='.github/workflows/build-private-source.yml'
 assert run['actor']['login']=='alanpfx' and run['head_repository']['full_name']==REPO
 assert run['event'] in {'push','workflow_dispatch'}
 
+# A superseded source pin must never publish an obsolete build under the same version.
+workflow_path='/contents/.github/workflows/build-private-source.yml'
+assert api(workflow_path+'?ref='+run['head_sha'])['sha']==api(workflow_path)['sha'],'Build source pin was superseded; wait for the current build'
+
+
 files=list(RAW.glob('*.ipa'));assert len(files)==2
 sums={line.split()[1]:line.split()[0] for line in (RAW/'SHA256SUMS.txt').read_text().splitlines()}
 version=build=None
