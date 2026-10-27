@@ -16,7 +16,7 @@
   },
   "concurrency": {
     "group": "mgcontrol-private-source-build",
-    "cancel-in-progress": false
+    "cancel-in-progress": true
   },
   "jobs": {
     "build": {
