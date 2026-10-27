@@ -24,7 +24,9 @@
       "runs-on": "macos-15",
       "timeout-minutes": 40,
       "env": {
-        "DEVELOPER_DIR": "/Applications/Xcode_16.4.app/Contents/Developer"
+        "DEVELOPER_DIR": "/Applications/Xcode_16.4.app/Contents/Developer",
+        "EXPECTED_APP_VERSION": "0.58",
+        "EXPECTED_APP_BUILD": "42"
       },
       "steps": [
         {

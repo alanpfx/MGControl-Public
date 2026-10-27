@@ -1,6 +1,7 @@
 from pathlib import Path
-import sys,zipfile,plistlib,hashlib,shutil,re
+import sys,zipfile,plistlib,hashlib,shutil,re,json,os
 source=Path(sys.argv[1]);out=Path(sys.argv[2]);out.mkdir(parents=True,exist_ok=True)
+expected_version=os.environ['EXPECTED_APP_VERSION'];expected_build=os.environ['EXPECTED_APP_BUILD']
 checks=[]
 for variant in ('widget','app-only'):
  candidates=list((source/'build').glob(f'*-{variant}-unsigned.ipa'))
@@ -12,10 +13,10 @@ for variant in ('widget','app-only'):
    if Path(name).suffix.lower() in {'.swift','.h','.m','.mm','.c','.cpp','.har','.chlz','.pem','.key'}:raise RuntimeError('Excluded source or credential file in installer')
    if not name.startswith('Payload/'):raise RuntimeError('Unexpected installer root')
   info=plistlib.loads(z.read('Payload/MGControl.app/Info.plist'))
-  if info['CFBundleShortVersionString']!='0.57' or info['CFBundleVersion']!='41':raise RuntimeError('Unexpected application version')
+  if info['CFBundleShortVersionString']!=expected_version or info['CFBundleVersion']!=expected_build:raise RuntimeError('Unexpected application version')
   if info['MinimumOSVersion']!='15.0':raise RuntimeError('Unexpected minimum OS')
   if 'Payload/MGControl.app/embedded.mobileprovision' in z.namelist():raise RuntimeError('Expected unsigned installer')
- name=f'MGControl-V0.57-{variant}-unsigned.ipa'
+ name=f'MGControl-V{expected_version}-{variant}-unsigned.ipa'
  shutil.copyfile(p,out/name)
  checks.append(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+name)
 (out/'SHA256SUMS.txt').write_text('\n'.join(checks)+'\n',encoding='utf8')
