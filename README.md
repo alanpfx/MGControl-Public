@@ -1,87 +1,57 @@
 # MGControl · MG 车控助手
 
-[加入 QQ 群：MG 车控助手交流（1048547373）](https://qun.qq.com/universal-share/share?ac=1&authKey=mP0d%2BInDEeQ5SUbRe4aXhIqIXR%2FPH3wBM6pXCouZ4Z9bGPtht5bxQXVb0wfRmMpX&busi_data=eyJncm91cENvZGUiOiIxMDQ4NTQ3MzczIiwidG9rZW4iOiJVemRJbElDQXNIanJxMVV5UWtTbEtoaXkyT2t4bTNMVlU2eldaRUxuZzVuMFduazN5UTZwdzJUdll0cC9IT3duIiwidWluIjoiMzA2ODA2OTQ3In0%3D&data=S9HyGqIYoxeeids4ghl0VT-x1pmEbJaOgcKGEBPJTB4qNMTf3iZro0IUhelRkrWgfaVW0aJ1_Ep2w3NRYxDuEA&svctype=4&tempid=h5_group_info)
+面向 iPhone 的第三方 MG Live 车辆信息与远程车控客户端。当前源码版 **0.58（42）**，最低支持 **iOS 16.0**。
 
-面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
+## 已实现功能
 
-**当前测试版：0.57（41）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+- 手机号与短信验证码登录：易盾图形验证、60 秒重发倒计时、错误提示。
+- 会话管理：tocToken / swapToken 交换与恢复，优先使用本机 Keychain 保存。
+- 车辆与车况：车辆列表、SOC、续航、里程、温度、电压、胎压、门窗及锁止状态、停车位置。
+- 远程控制：锁车、解锁、开车窗、关车窗、开空调、关空调、后备箱、寻车。
+- 控制确认：危险操作二次确认、生物识别/设备密码、安全码授权及车况反向确认。
+- 消息、充电信息展示和共享车况小组件；小组件深链仅导航或刷新，不直接下发车辆指令。
+- 调试 Mock：`MG_MOCK=1` 时使用演示后端，验证码为 `123456`；发布构建默认使用真实服务。
 
-**严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
+## 构建 IPA
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.57) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
-
-> 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
->
-> 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
-
-## 项目介绍
-
-MGControl 使用 SwiftUI 构建，目标是在 iPhone 上集中展示最近车况、提供经过确认的快捷操作，并把蓝牙钥匙入口独立出来，以便在网络不可用时使用已准备好的本机钥匙。
-
-### 安装包功能
-
-| 模块 | 当前能力与边界 |
-| --- | --- |
-| 车况 | 电量、续航、里程、低压电池电压、温度、胎压、门锁门窗及数据时间；缺失数据不会伪装为实时值 |
-| 远程车控 | 锁车、解锁、车窗通风、关闭车窗、鸣笛寻车；是否可用由车辆和账号实际权限决定 |
-| 空调 | 温控、制冷、制热和关闭空调集中在同一面板；部分模式仍需车型实测 |
-| 车辆位置 | 展示车辆最近上报位置对应的地址及定位时间，需账号授权及有效位置数据 |
-| 蓝牙钥匙 | 配置、系统配对、初始化、手动开关锁；已准备且有效的本机资料可供离线连接使用 |
-| 持续连接 | 保存成功认证并控车的设备后，持续等待该设备进入通信范围；不保证进程永久运行 |
-| 无感控制 | 近车解锁、离车锁车分别开关；信号阈值、持续时长、动作冷却可调，属于实验功能 |
-| 自动刷新 | 可设置 10 分钟、30 分钟、1 小时、2 小时、3 小时、4 小时、5 小时、6 小时；后台执行时点由 iOS 调度 |
-| 系统展示 | 桌面小组件；iOS 16.2 及以上支持实时活动，灵动岛还需兼容机型；显示最近同步的数据和明确的状态时间 |
-| 个性化 | 系统/浅色/深色外观、车辆颜色、自定义车名；小组件跟随系统外观 |
-
-小组件的快捷按钮会打开 App 中对应操作入口，再由用户确认；不会因为点击图标就直接在后台发出车辆指令。分享钥匙的“全功能”不等同于拥有车主网络远控权限，不能借本 App 获得未被授予的权限。
-
-### 已有验证与待验证内容
-
-- 用户已反馈：数字钥匙配对、初始化、蓝牙手动解锁/锁车、离线连接及车辆检测钥匙启动、0.51 的自动连接可用。
-- 0.54 完整内部版本通过 316 项测试，以及带小组件和纯 App 两种未签名 arm64 安装包编译。
-- iOS 15 真机首次登录、蓝牙配对、无感响应速度、不同机型与长时间后台表现仍需实车验证。自动化测试不能替代车辆测试。
-- 当前不提供座椅通风/加热、方向盘加热、仅风扇通风、急速降温/升温；这些是后续研究项，不应视作已实现。
-- 暂不宣称支持其他名爵/荣威车型；车辆、账号权限及系统版本不同，结果可能不同。
-
-## 快速开始
-
-1. 阅读 [免责声明](docs/DISCLAIMER.md)，在 Release 下载合适的 **未签名 IPA**。
-2. 使用自己的合法签名方式安装。首次安装前确认是否能正确签名小组件和 App Groups；不支持时选 `app-only`。
-3. 根据 [安装与使用](docs/INSTALL.md) 使用自己的手机号完成验证登录和车辆确认；本次完整包已内置应用登录配置，不再要求手动导入。项目不会分发任何真实账号、令牌、安全码或钥匙。
-4. 先测试车况和手动操作，再配置蓝牙钥匙；确认手动开关锁成功后保存自动连接设备。
-5. 无感开关锁默认关闭。先在停车、随身携带实体钥匙的情况下单独开启和测试。
-
-## 部分源码与界面预览
-
-```text
-Shared/                         车况显示模型、卡片、主题、实时活动视图、共享缓存
-Widget/                         桌面组件与实时活动展示代码
-MGControl/Views/                 车控卡片、快捷按钮与空调面板的展示组件
-MGControl/Assets.xcassets/       当前图标及车辆展示资源
-Preview/                        仅模拟数据的界面预览入口和展示动作类型
-project-preview.yml             独立预览工程配置
-docs/                           安装、使用、免责声明和源码范围
-```
-
-在 macOS 安装 Xcode 及 XcodeGen 后，在此目录执行：
+macOS 安装 Xcode 16.4、XcodeGen 和 ldid：
 
 ```sh
-xcodegen generate --spec project-preview.yml
-open MGControlPreview.xcodeproj
+brew install xcodegen ldid
+./scripts/build-ipa.sh --target 16.0 --appgroup
+python3 scripts/check-ipa.py dist/MGControl-Release-unsigned.ipa --target 16.0
 ```
 
-选择 iPhone 模拟器运行 `MGControlPreview`。所有按钮仅演示界面，不登录账号、不访问车企服务器、不扫描蓝牙、不操作车辆。源码中的共享组使用示例标识，不能沿用到自己的签名环境。
+也可以安装 Xcode 后运行 `xcodegen generate`，再打开 `MGControl.xcodeproj`。普通 Apple 签名安装时，请将主 App、Widget 和 App Group 修改为自己开发者账号下的唯一标识，并保持一致。
 
-## 反馈与隐私
+## GitHub Actions
 
-请通过 [Issues](https://github.com/alanpfx/MGControl-Public/issues) 提供版本号、iPhone/iOS 信息、操作步骤及脱敏诊断。不要公开上传手机号、完整车架号、车辆地址、账号令牌、配对码、数字钥匙、HAR 或系统诊断原包。提交截图前遮挡个人与车辆信息。
+工作流 [Build source IPA (iOS 16)](.github/workflows/build-source-ipa.yml) 使用 `macos-15` 和 Xcode 16.4：
 
-定位、车况和远控需要相应服务与账号权限；验证页面、地图/地址解析也可能使用相关服务提供方。请不要把本项目理解为“所有网络请求都不会离开手机”。本次提供的界面预览本身不发出车企网络请求。
+1. 打开仓库 **Actions → Build source IPA (iOS 16) → Run workflow**。
+2. 默认最低版本为 `16.0`，保留 App Group 选项。
+3. 构建成功后下载 `MGControl-<运行编号>-ios16-unsigned` Artifact，其中包含未签名 IPA 与 SHA256 校验和。
+4. 工作流同时检查每个 `Info.plist` 的 `MinimumOSVersion` 与 Mach-O 的 `minos`，高于目标版本会使构建失败。
 
-## 源码、标识及鸣谢
+无需私有源码令牌或 Apple 开发者证书即可生成未签名 IPA。安装到自己的设备时，可使用自己的签名方式；使用共享小组件需要正确签名 App Group。
 
-本项目采用自定义的 [MGControl 非商业使用与禁止营利协议](LICENSE)。**严禁营利性和商业性使用**，包括收费分发、付费激活、收费签名/安装/配置服务、广告变现及商业捆绑。个人非商业学习、研究与使用须保留协议、出处及免责声明；修改和分享不得取消原有非商业限制。
+## 工程结构
 
-这是“部分源码可见、个人非商业使用”许可，不是 MIT、Apache 或其他标准开放源代码许可证。品牌、商标与相关素材权益归各自权利人，协议不授予第三方标识使用权。详见 [源码范围](docs/SOURCE-SCOPE.md)。
+```text
+CarControl/                    SwiftUI 登录、车况、车控、消息与设置
+CarControlWidget/              共享车况小组件
+Packages/CoreKit/              业务模型、API 协议、Mock、Widget 存储与路由
+MGControl/Assets.xcassets/     MGControl 图标和车辆素材
+Shared/、Widget/、Preview/     原有独立界面预览模块
+scripts/                       未签名 IPA 打包和 iOS 最低版本校验
+project.yml                    完整 MGControl App + Widget 工程
+project-preview.yml            原有独立界面预览工程
+```
 
-文档组织参考了 [MR Linker（上汽车联助手）](https://gitee.com/yangyachao-X/mr-linker) 的项目介绍、安装和使用说明结构，本文针对 MGControl 独立编写；两者系统平台、功能及许可不应混同，不代表代码合作或授权。
+## 源码来源与许可
+
+短信登录和车控实现以 [Anthocyanin/carcontrol-ios](https://gitee.com/Anthocyanin/carcontrol-ios) 的 `e7ac5385b541aa9ea5f93a5ed4e2b262f6cf6206` 为参考基线导入，并针对 MGControl 调整名称、Bundle ID、深链、App Group、资源与构建配置。参考项目采用 MIT 许可，其说明见 [第三方源码说明](docs/CARCONTROL-SOURCE.md)。
+
+MGControl 原有代码、资源及本衍生工程继续适用根目录的 **MGControl 非商业使用与禁止营利协议**，不是 MIT/Apache 许可。请同时阅读 [免责声明](docs/DISCLAIMER.md)、[安装说明](docs/INSTALL.md) 和 [源码范围](docs/SOURCE-SCOPE.md)。不得移除原项目的非商业限制或来源说明。
+
+本项目为独立第三方客户端，不隶属上汽或 MG。账号、接口权限与车型支持取决于实际服务；短信下发、控车安全码和车辆指令仍需使用本人账号及车辆真机验证。请不要在 Issues 或构建日志中发布手机号、会话令牌、安全码、完整 VIN 或车辆位置。

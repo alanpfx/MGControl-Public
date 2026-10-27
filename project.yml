@@ -1,0 +1,92 @@
+name: MGControl
+options:
+  bundleIdPrefix: com.alanpfx.mgcontrol
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+packages:
+  CoreKit:
+    path: Packages/CoreKit
+targets:
+  MGControl:
+    type: application
+    platform: iOS
+    sources:
+      - path: CarControl
+      - path: MGControl/Assets.xcassets
+    dependencies:
+      - package: CoreKit
+      - target: MGControlWidget
+        embed: true
+    info:
+      path: CarControl/Info.plist
+      properties:
+        CFBundleDisplayName: MG 车控助手
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSFaceIDUsageDescription: 用于远程车控前的身份验证
+        NSBluetoothAlwaysUsageDescription: 用于连接车辆蓝牙设备
+        NSLocationWhenInUseUsageDescription: 用于查看车辆位置与寻车
+        CarControlAppGroupIdentifier: group.com.alanpfx.mgcontrol.shared
+        LSApplicationQueriesSchemes:
+          - mglive
+        CFBundleURLTypes:
+          - CFBundleURLName: com.alanpfx.mgcontrol
+            CFBundleURLSchemes:
+              - mgcontrol
+    entitlements:
+      path: CarControl/CarControl.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.alanpfx.mgcontrol.shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.alanpfx.mgcontrol
+        PRODUCT_NAME: MGControl
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        MARKETING_VERSION: "0.58"
+        CURRENT_PROJECT_VERSION: "42"
+    scheme:
+      testTargets: []
+  MGControlWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: CarControlWidget
+    dependencies:
+      - package: CoreKit
+    info:
+      path: CarControlWidget/Info.plist
+      properties:
+        CFBundleDisplayName: 车辆状态
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        CarControlAppGroupIdentifier: group.com.alanpfx.mgcontrol.shared
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: CarControlWidget/CarControlWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.alanpfx.mgcontrol.shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.alanpfx.mgcontrol.widget
+        PRODUCT_NAME: MGControlWidget
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+        MARKETING_VERSION: "0.58"
+        CURRENT_PROJECT_VERSION: "42"

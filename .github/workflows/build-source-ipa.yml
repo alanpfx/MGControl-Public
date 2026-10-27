@@ -1,0 +1,104 @@
+name: Build source IPA (iOS 16)
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'CarControl/**'
+      - 'CarControlWidget/**'
+      - 'MGControl/Assets.xcassets/**'
+      - 'Packages/**'
+      - 'scripts/**'
+      - 'project.yml'
+      - '.github/workflows/build-source-ipa.yml'
+  workflow_dispatch:
+    inputs:
+      xcode:
+        description: Xcode version
+        default: '16.4'
+        required: true
+      deployment_target:
+        description: Minimum supported iOS version
+        default: '16.0'
+        required: true
+      app_group:
+        description: Embed App Group entitlements for unsigned installation
+        type: boolean
+        default: true
+permissions:
+  contents: read
+concurrency:
+  group: mgcontrol-source-ipa
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - name: Checkout complete source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ inputs.xcode || '16.4' }}
+      - name: Show toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+      - name: Install build tools
+        run: brew install xcodegen ldid
+      - name: Validate project configuration
+        run: |
+          python3 -m py_compile scripts/check-ipa.py
+          xcodegen generate --spec project.yml
+          xcodebuild -project MGControl.xcodeproj -scheme MGControl -showdestinations
+      - name: Build unsigned IPA
+        env:
+          APP_GROUP: ${{ inputs.app_group }}
+          TARGET: ${{ inputs.deployment_target || '16.0' }}
+        run: |
+          set -euo pipefail
+          chmod +x scripts/*.sh
+          args=(--target "$TARGET")
+          if [ "${APP_GROUP:-true}" = "true" ]; then args+=(--appgroup); fi
+          bash scripts/build-ipa.sh "${args[@]}"
+      - name: Verify iOS deployment compatibility
+        env:
+          TARGET: ${{ inputs.deployment_target || '16.0' }}
+        run: |
+          set -euo pipefail
+          ipa=$(find dist -maxdepth 1 -name '*.ipa' -print -quit)
+          test -n "$ipa"
+          python3 scripts/check-ipa.py "$ipa" --target "$TARGET" | tee build/ipa-check.txt
+          shasum -a 256 dist/*.ipa | tee dist/SHA256SUMS
+          {
+            echo '### MGControl IPA'
+            echo "- Commit: $(git rev-parse --short HEAD)"
+            echo "- Xcode: $(xcodebuild -version | head -1)"
+            echo "- Package: $(basename "$ipa")"
+            echo
+            cat build/ipa-check.txt
+            echo
+            echo '```'
+            cat dist/SHA256SUMS
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload IPA and checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: MGControl-${{ github.run_number }}-ios16-unsigned
+          path: |
+            dist/*.ipa
+            dist/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MGControl-${{ github.run_number }}-build-log
+          path: build/archive.log
+          if-no-files-found: ignore
+          retention-days: 7
