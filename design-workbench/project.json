@@ -1,0 +1,77 @@
+{
+  "name": "MGDesignWorkbench",
+  "options": {
+    "deploymentTarget": {
+      "iOS": "15.0"
+    }
+  },
+  "settings": {
+    "base": {
+      "SWIFT_VERSION": "5.0",
+      "IPHONEOS_DEPLOYMENT_TARGET": "15.0",
+      "CODE_SIGNING_ALLOWED": "NO",
+      "CODE_SIGNING_REQUIRED": "NO",
+      "MARKETING_VERSION": "0.1",
+      "CURRENT_PROJECT_VERSION": "1",
+      "TARGETED_DEVICE_FAMILY": "1,2"
+    }
+  },
+  "targets": {
+    "MGDesignWorkbench": {
+      "type": "application",
+      "platform": "iOS",
+      "sources": [
+        {
+          "path": ".",
+          "excludes": [
+            "Tests",
+            "project.json",
+            "README.md"
+          ]
+        },
+        "../MGControl/Assets.xcassets"
+      ],
+      "settings": {
+        "base": {
+          "PRODUCT_BUNDLE_IDENTIFIER": "com.alanpfx.MGControl.DesignWorkbench",
+          "GENERATE_INFOPLIST_FILE": "YES",
+          "INFOPLIST_KEY_CFBundleDisplayName": "MG UI设计工作台",
+          "INFOPLIST_KEY_UILaunchScreen_Generation": "YES",
+          "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon"
+        }
+      }
+    },
+    "MGDesignWorkbenchTests": {
+      "type": "bundle.unit-test",
+      "platform": "iOS",
+      "sources": [
+        "Tests"
+      ],
+      "dependencies": [
+        {
+          "target": "MGDesignWorkbench"
+        }
+      ],
+      "settings": {
+        "base": {
+          "PRODUCT_BUNDLE_IDENTIFIER": "com.alanpfx.MGControl.DesignWorkbench.Tests",
+          "GENERATE_INFOPLIST_FILE": "YES"
+        }
+      }
+    }
+  },
+  "schemes": {
+    "MGDesignWorkbench": {
+      "build": {
+        "targets": {
+          "MGDesignWorkbench": "all"
+        }
+      },
+      "test": {
+        "targets": [
+          "MGDesignWorkbenchTests"
+        ]
+      }
+    }
+  }
+}

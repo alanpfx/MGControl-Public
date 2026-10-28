@@ -1,0 +1,83 @@
+{
+  "name": "Build UI design workbench",
+  "on": {
+    "workflow_dispatch": {},
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "paths": [
+        "design-workbench/**",
+        ".github/workflows/design-workbench.yml"
+      ]
+    }
+  },
+  "permissions": {
+    "contents": "write"
+  },
+  "concurrency": {
+    "group": "design-workbench-build",
+    "cancel-in-progress": true
+  },
+  "jobs": {
+    "build": {
+      "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/main' && github.actor == 'alanpfx'",
+      "runs-on": "macos-15",
+      "timeout-minutes": 30,
+      "env": {
+        "DEVELOPER_DIR": "/Applications/Xcode_16.4.app/Contents/Developer"
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@v6",
+          "with": {
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Generate standalone UI-only project",
+          "run": "if ! command -v xcodegen >/dev/null; then brew install xcodegen; fi\nxcodegen generate --spec design-workbench/project.json"
+        },
+        {
+          "name": "Test schema and native previews",
+          "run": "SIM=$(xcrun simctl list devices available -j | python3 -c 'import sys,json; d=json.load(sys.stdin); print(next(x[\"udid\"] for a in d[\"devices\"].values() for x in a if x[\"name\"].startswith(\"iPhone\")))')\nxcodebuild test -project design-workbench/MGDesignWorkbench.xcodeproj -scheme MGDesignWorkbench -configuration Debug -destination \"platform=iOS Simulator,id=$SIM\" -resultBundlePath design-tests.xcresult CODE_SIGNING_ALLOWED=NO"
+        },
+        {
+          "name": "Build iOS15+ device app",
+          "run": "xcodebuild build -project design-workbench/MGDesignWorkbench.xcodeproj -scheme MGDesignWorkbench -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath design-build CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO"
+        },
+        {
+          "name": "Package and verify permissions",
+          "run": "python3 design-workbench/package.py"
+        },
+        {
+          "name": "Upload installer",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "MGDesignWorkbench-0.1",
+            "path": "design-output/",
+            "retention-days": 14
+          }
+        },
+        {
+          "name": "Publish separate design-app release",
+          "env": {
+            "GH_TOKEN": "${{ github.token }}"
+          },
+          "run": "gh release create design-workbench-v0.1 design-output/*.ipa design-output/SHA256SUMS.txt LICENSE --title 'MG UI设计工作台 0.1（1）' --notes-file design-workbench/README.md --prerelease"
+        },
+        {
+          "name": "Upload test results",
+          "if": "always()",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "MGDesignWorkbench-tests",
+            "path": "design-tests.xcresult/",
+            "retention-days": 3,
+            "if-no-files-found": "ignore"
+          }
+        }
+      ]
+    }
+  }
+}
