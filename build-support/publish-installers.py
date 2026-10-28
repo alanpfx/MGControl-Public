@@ -87,7 +87,8 @@ except urllib.error.HTTPError as e:
 if existing is not None and not existing['draft']:
  expected={name:'sha256:'+hashlib.sha256(data).hexdigest() for name,data in assets}
  actual={x['name']:x.get('digest') for x in existing['assets']}
- assert actual==expected,'Published version differs; bump version rather than replacing installers'
+ allowed_addons={f'MGControl-V{version}-widget-trollstore-appgroups.ipa','TrollStore-AppGroups-verification.json','SHA256SUMS-trollstore-appgroups.txt'}
+ assert all(actual.get(k)==v for k,v in expected.items()) and set(actual)-set(expected)<=allowed_addons,'Published version differs; bump version rather than replacing installers'
  print('Release already published with identical verified files: '+existing['html_url']);sys.exit(0)
 
 head=api('/git/ref/heads/main')['object']['sha']
