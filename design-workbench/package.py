@@ -9,7 +9,10 @@ assert info['CFBundleIdentifier']=='com.alanpfx.MGControl.DesignWorkbench'
 out=Path('design-output');out.mkdir(exist_ok=True)
 raw=out/'raw.zip'
 with zipfile.ZipFile(raw,'w',zipfile.ZIP_DEFLATED) as z:
+ z.writestr('Payload/',b'')
+ z.write(app,'Payload/MGDesignWorkbench.app/')
  for p in sorted(app.rglob('*')):
+  if p.is_dir():z.write(p,'Payload/MGDesignWorkbench.app/'+p.relative_to(app).as_posix()+'/')
   if p.is_file():
    assert not p.is_symlink()
    z.write(p,'Payload/MGDesignWorkbench.app/'+p.relative_to(app).as_posix())
