@@ -1,4 +1,5 @@
 """Publish verified public-run installers without exposing private source or logs."""
+from ipa_permissions import normalized
 from pathlib import Path
 import os,json,urllib.request,urllib.error,urllib.parse,hashlib,zipfile,io,re,base64,sys
 
@@ -66,8 +67,8 @@ for variant in ('widget','app-only'):
  name=f'MGControl-V{version}-{variant}-ready-unsigned.ipa';dest=OUT/name
  with zipfile.ZipFile(p) as src,zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED) as dst:
   for entry in src.infolist():
-   if entry.filename!=resource:dst.writestr(entry,src.read(entry))
-  item=zipfile.ZipInfo(resource,date_time=(2026,1,1,0,0,0));item.compress_type=zipfile.ZIP_DEFLATED;dst.writestr(item,configuration)
+   if entry.filename!=resource:dst.writestr(normalized(entry,src.read(entry)),src.read(entry))
+  item=zipfile.ZipInfo(resource,date_time=(2026,1,1,0,0,0));item.compress_type=zipfile.ZIP_DEFLATED;dst.writestr(normalized(item,configuration),configuration)
  with zipfile.ZipFile(dest) as z:
   assert z.testzip() is None and z.read(resource)==configuration
   with zipfile.ZipFile(p) as original:

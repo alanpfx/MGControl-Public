@@ -1,3 +1,4 @@
+from ipa_permissions import normalize_ipa
 from pathlib import Path
 import sys,zipfile,plistlib,hashlib,shutil,re,json,os
 source=Path(sys.argv[1]);out=Path(sys.argv[2]);out.mkdir(parents=True,exist_ok=True)
@@ -17,7 +18,7 @@ for variant in ('widget','app-only'):
   if info['MinimumOSVersion']!='15.0':raise RuntimeError('Unexpected minimum OS')
   if 'Payload/MGControl.app/embedded.mobileprovision' in z.namelist():raise RuntimeError('Expected unsigned installer')
  name=f'MGControl-V{expected_version}-{variant}-unsigned.ipa'
- shutil.copyfile(p,out/name)
- checks.append(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+name)
+ normalize_ipa(p,out/name)
+ checks.append(hashlib.sha256((out/name).read_bytes()).hexdigest()+'  '+name)
 (out/'SHA256SUMS.txt').write_text('\n'.join(checks)+'\n',encoding='utf8')
 print('Exported only two verified installers and checksums.')
