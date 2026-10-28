@@ -67,7 +67,7 @@
           "name": "Upload installer",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGDesignWorkbench-0.1",
+            "name": "MGDesignWorkbench-0.1.1",
             "path": "design-output/",
             "retention-days": 14
           }
@@ -77,7 +77,7 @@
           "env": {
             "GH_TOKEN": "${{ github.token }}"
           },
-          "run": "CURRENT=$(gh api repos/alanpfx/MGControl-Public/git/ref/heads/main --jq '.object.sha')\nif [ \"$CURRENT\" != \"$GITHUB_SHA\" ]; then echo 'Superseded design build; do not publish'; exit 1; fi\ngh release create design-workbench-v0.1 design-output/*.ipa design-output/SHA256SUMS.txt LICENSE --title 'MG UI设计工作台 0.1（1）' --notes-file design-workbench/README.md --prerelease"
+          "run": "CURRENT=$(gh api repos/alanpfx/MGControl-Public/git/ref/heads/main --jq '.object.sha')\nif [ \"$CURRENT\" != \"$GITHUB_SHA\" ]; then echo 'Superseded design build; do not publish'; exit 1; fi\ngh release create design-workbench-v0.1.1 design-output/*.ipa design-output/SHA256SUMS.txt LICENSE --title 'MG UI设计工作台 0.1.1（2）' --notes-file design-workbench/README.md --prerelease"
         },
         {
           "name": "Upload test results",
