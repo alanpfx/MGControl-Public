@@ -1,0 +1,12 @@
+{
+  "version": "0.1.1",
+  "build": 2,
+  "run": 40689081891,
+  "tests_passed": 5,
+  "minimumOS": "15.0",
+  "permissions": "755/644",
+  "screenshots_visually_reviewed": true,
+  "device_interaction_tested": false,
+  "sha256": "c61294372954056bb02fe14f131674ef415e9384d5f04b155c03d4ef29a7b513",
+  "formal_app_theme_import": false
+}
