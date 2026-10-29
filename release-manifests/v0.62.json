@@ -1,0 +1,28 @@
+{
+  "version": "0.62",
+  "build": "46",
+  "build_run": "https://github.com/alanpfx/MGControl-Public/actions/runs/40798702479",
+  "release": "https://github.com/alanpfx/MGControl-Public/releases/tag/v0.62",
+  "assets": [
+    {
+      "name": "MGControl-V0.62-widget-ready-unsigned.ipa",
+      "sha256": "f0d53e3ed041d540873abe77d6cfc0e6136db76a1d59a4a7d9a416e382f12afb",
+      "bytes": 6631176
+    },
+    {
+      "name": "MGControl-V0.62-app-only-ready-unsigned.ipa",
+      "sha256": "b1e1f40069b740732e19ad6084471eb05c23e414d06e5ef308a94d130644f926",
+      "bytes": 5273582
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "sha256": "6998e7a0032fa89853214daa0155bd7363fe6fb62604ce75b7e73c62c2b18b11",
+      "bytes": 218
+    },
+    {
+      "name": "LICENSE.txt",
+      "sha256": "f607328afffcba8396019cf41297ac001f9dd6669c58f1d63c5e72b133af46c9",
+      "bytes": 4457
+    }
+  ]
+}
