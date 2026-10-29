@@ -19,3 +19,11 @@ iOS 15、16 支持 WidgetKit。TrollStore 安装能够启动 App，并不表示�
 
 参考：[TrollStore 功能与自定义权限](https://github.com/opa334/TrollStore#features)、[Apple App Groups](https://developer.apple.com/documentation/Xcode/configuring-app-groups)。
 
+
+## 0.62 分阶段诊断
+
+已知iOS15.5反馈：主App可取得容器并同步车况，但扩展没有回执；更新TrollStore、刷新注册后仍未解决。不能宣称权限适配已在真机通过。
+
+0.62的错误卡直接显示版本、生成时间与W01/W02/W03/W04：分别指容器URL不可用、未同步摘要、摘要格式异常、系统文件读写错误。中/大尺寸同时显示扩展包内共享组声明检查。主App诊断新增两个程序的包内签名信息，读取回执显示真实扩展版本。
+
+覆盖安装后读取一次车况并重新添加组件，反馈组件截图与诊断开头即可，不需要重新领取钥匙或提供抓包。若仍无回执，组件上显示的版本和错误码可帮助区分旧快照与实际运行失败。
