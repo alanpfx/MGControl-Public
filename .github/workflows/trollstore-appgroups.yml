@@ -1,25 +1,70 @@
 {
   "name": "Prepare TrollStore App Groups installer",
   "on": {
-    "push": {"branches": ["main"], "paths": [".github/workflows/trollstore-appgroups.yml", "build-support/trollstore-appgroups.py"]},
-    "workflow_dispatch": {"inputs": {"version": {"description": "Existing MGControl release version", "required": false}}},
-    "workflow_run": {"workflows": ["Publish successful MGControl installers"], "types": ["completed"]}
+    "workflow_dispatch": {
+      "inputs": {
+        "version": {
+          "description": "Existing MGControl release version",
+          "required": false
+        }
+      }
+    },
+    "workflow_run": {
+      "workflows": [
+        "Publish successful MGControl installers"
+      ],
+      "types": [
+        "completed"
+      ]
+    }
   },
-  "permissions": {"contents": "read"},
-  "concurrency": {"group": "mgcontrol-trollstore-appgroups", "cancel-in-progress": false},
+  "permissions": {
+    "contents": "read"
+  },
+  "concurrency": {
+    "group": "mgcontrol-trollstore-appgroups",
+    "cancel-in-progress": false
+  },
   "jobs": {
     "prepare": {
       "if": "github.repository == 'alanpfx/MGControl-Public' && github.actor == 'alanpfx' && (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'alanpfx/MGControl-Public'))",
       "runs-on": "macos-15",
       "timeout-minutes": 15,
-      "permissions": {"contents": "write"},
+      "permissions": {
+        "contents": "write"
+      },
       "steps": [
-        {"uses": "actions/checkout@v6", "with": {"ref": "main", "persist-credentials": false}},
-        {"name": "Resolve current released version", "env": {"REQUESTED_VERSION": "${{ inputs.version }}"}, "run": "python3 -c 'import json,os; w=json.load(open(\".github/workflows/build-private-source.yml\")); v=os.environ.get(\"REQUESTED_VERSION\") or w[\"jobs\"][\"build\"][\"env\"][\"EXPECTED_APP_VERSION\"]; open(os.environ[\"GITHUB_ENV\"],\"a\").write(\"APP_VERSION=\"+v+\"\\n\")'"},
-        {"name": "Embed and verify scoped entitlements; publish additional installer", "env": {"GH_TOKEN": "${{ github.token }}"}, "run": "python3 build-support/trollstore-appgroups.py"},
-        {"uses": "actions/upload-artifact@v4", "with": {"name": "TrollStore-AppGroups-installer", "path": "appgroups-output/", "if-no-files-found": "error", "retention-days": 7}}
+        {
+          "uses": "actions/checkout@v6",
+          "with": {
+            "ref": "main",
+            "persist-credentials": false
+          }
+        },
+        {
+          "name": "Resolve current released version",
+          "env": {
+            "REQUESTED_VERSION": "${{ inputs.version }}"
+          },
+          "run": "python3 -c 'import json,os; w=json.load(open(\".github/workflows/build-private-source.yml\")); v=os.environ.get(\"REQUESTED_VERSION\") or w[\"jobs\"][\"build\"][\"env\"][\"EXPECTED_APP_VERSION\"]; open(os.environ[\"GITHUB_ENV\"],\"a\").write(\"APP_VERSION=\"+v+\"\\n\")'"
+        },
+        {
+          "name": "Embed and verify scoped entitlements; publish additional installer",
+          "env": {
+            "GH_TOKEN": "${{ github.token }}"
+          },
+          "run": "python3 build-support/trollstore-appgroups.py"
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "TrollStore-AppGroups-installer",
+            "path": "appgroups-output/",
+            "if-no-files-found": "error",
+            "retention-days": 7
+          }
+        }
       ]
     }
   }
 }
-
