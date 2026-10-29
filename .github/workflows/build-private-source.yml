@@ -25,8 +25,8 @@
       "timeout-minutes": 40,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_16.4.app/Contents/Developer",
-        "EXPECTED_APP_VERSION": "0.61",
-        "EXPECTED_APP_BUILD": "45"
+        "EXPECTED_APP_VERSION": "0.62",
+        "EXPECTED_APP_BUILD": "46"
       },
       "steps": [
         {
@@ -50,7 +50,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "d8f3106e6b8e4f655a4babfc44055fdf6e66f149",
+            "ref": "0d0dd165ce7a3e849589f5386162f7bbdb8affc1",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
@@ -66,7 +66,7 @@
           "name": "Upload verified unsigned installers",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.61-unsigned",
+            "name": "MGControl-0.62-unsigned",
             "path": "public-output/installers/",
             "if-no-files-found": "error",
             "retention-days": 7

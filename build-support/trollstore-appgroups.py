@@ -47,7 +47,7 @@ with tempfile.TemporaryDirectory() as tmp:
   assert info['MGControlAppGroupIdentifier']==GROUP and info['MinimumOSVersion']=='15.0' and info['CFBundleShortVersionString']==VERSION
   bid=info['CFBundleIdentifier'];assert bid in ['com.alanpfx.MGControl','com.alanpfx.MGControl.Widget']
   binary=bundle/info['CFBundleExecutable'];executables.add(binary.relative_to(root).as_posix());before=sections(binary.read_bytes())
-  ent={'application-identifier':'TROLLTROLL.*' if bundle==app else 'TROLLTROLL.'+bid,'com.apple.developer.team-identifier':'TROLLTROLL','com.apple.security.application-groups':[GROUP]}
+  ent={'application-identifier':'TROLLTROLL.'+bid,'com.apple.developer.team-identifier':'TROLLTROLL','com.apple.security.application-groups':[GROUP]}
   if bundle==app:ent['keychain-access-groups']=['TROLLTROLL.*']
   path=root/(bid+'.entitlements');path.write_bytes(plistlib.dumps(ent))
   subprocess.run(['codesign','--force','--sign','-','--identifier',bid,'--entitlements',str(path),'--generate-entitlement-der','--timestamp=none',str(bundle)],check=True)
@@ -82,7 +82,7 @@ for path in [dest,manifest,checksum]:
  assert uploaded['digest']==digest
 marker='### TrollStore App Groups 适配包'
 if marker not in release['body']:
- body=release['body']+'\n\n'+marker+'\n\n新增 `widget-trollstore-appgroups.ipa`，预置主App/扩展相同的App Groups权限及巨魔默认身份兼容配置，供巨魔用户覆盖安装测试。普通签名仍用原widget-ready包。程序段及原资源已核对不变，版本仍为'+VERSION+'。不必卸载或重新领取钥匙。安装后打开主App同步车况，再重新添加小组件；实际容器共享仍待真机验证。\n'
+ body=release['body']+'\n\n'+marker+'\n\n新增 `widget-trollstore-appgroups.ipa`，预置主App/扩展相同的App Groups权限及巨魔默认身份兼容配置，供巨魔用户覆盖安装测试。主App与扩展均使用精确应用标识，主App保留原巨魔钥匙串访问组。普通签名仍用原widget-ready包。程序段及原资源已核对不变，版本仍为'+VERSION+'。不必卸载或重新领取钥匙。安装后打开主App同步车况，再重新添加小组件；实际容器共享仍待真机验证。\n'
  api('/releases/'+str(release['id']),{'body':body},'PATCH')
 print('Prepared and published scoped TrollStore App Groups installer; runtime verification pending.')
 
