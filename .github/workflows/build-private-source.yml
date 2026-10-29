@@ -21,7 +21,7 @@
   "jobs": {
     "build": {
       "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/main' && github.actor == 'alanpfx'",
-      "runs-on": "macos-15",
+      "runs-on": "macos-15-intel",
       "timeout-minutes": 40,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_16.4.app/Contents/Developer",

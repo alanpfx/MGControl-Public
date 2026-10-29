@@ -28,7 +28,7 @@
   "jobs": {
     "prepare": {
       "if": "github.repository == 'alanpfx/MGControl-Public' && github.actor == 'alanpfx' && (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'alanpfx/MGControl-Public'))",
-      "runs-on": "macos-15",
+      "runs-on": "macos-15-intel",
       "timeout-minutes": 15,
       "permissions": {
         "contents": "write"
