@@ -2,11 +2,19 @@ import Foundation
 
 struct SharedVehicleStore {
     static var groupIdentifier: String {
-        let configured = Bundle.main.object(forInfoDictionaryKey:"MGControlAppGroupIdentifier") as? String
-        return configured?.isEmpty == false ? configured! : "group.example.MGControl"
+        WidgetSharedGroupResolver.selection.identifier ?? WidgetSharedGroupResolver.defaultIdentifier
     }
     static var live: Self {
-        Self(directory:FileManager.default.containerURL(forSecurityApplicationGroupIdentifier:groupIdentifier))
+        let selection=WidgetSharedGroupResolver.selection
+        guard let group=selection.identifier,let base=FileManager.default.containerURL(forSecurityApplicationGroupIdentifier:group) else {return Self(directory:nil)}
+        do {return Self(directory:try scopedDirectory(base,adapted:selection.mode == .adapted))}
+        catch {return Self(directory:nil)}
+    }
+    static func scopedDirectory(_ base: URL,adapted: Bool) throws -> URL {
+        guard adapted else {return base}
+        let scoped=base.appendingPathComponent("MGControl-Widget-v1",isDirectory:true)
+        try FileManager.default.createDirectory(at:scoped,withIntermediateDirectories:true)
+        return scoped
     }
     let directory: URL?
     private struct Envelope: Codable {
