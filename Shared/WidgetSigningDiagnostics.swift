@@ -8,10 +8,10 @@ enum WidgetSigningDiagnostics {
         return "\(info["CFBundleShortVersionString"] as? String ?? "?") (\(info["CFBundleVersion"] as? String ?? "?"))"
     }
     static func entitlements(_ data: Data) throws -> [String:Any] {
-        let b=Array(data)
+        let b=data,base=data.startIndex
         func number(_ offset: Int, big: Bool=false) -> Int? {
             guard offset >= 0, offset <= b.count-4 else {return nil}
-            let a=(0..<4).map {Int(b[offset+$0])}
+            let a=(0..<4).map {Int(b[base+offset+$0])}
             return big ? (a[0]<<24 | a[1]<<16 | a[2]<<8 | a[3]) : (a[3]<<24 | a[2]<<16 | a[1]<<8 | a[0])
         }
         guard b.count >= 32,b.count <= 32*1024*1024,number(0)==0xfeedfacf,
@@ -35,7 +35,7 @@ enum WidgetSigningDiagnostics {
                       relative <= total-8,number(start+relative,big:true)==0xfade7171,
                       let bytes=number(start+relative+4,big:true),bytes >= 8,bytes <= 65536,
                       bytes <= total-relative else {throw InspectionFailure(text:"签名权限数据无效")}
-                let raw=Data(b[(start+relative+8)..<(start+relative+bytes)])
+                let raw=Data(b[(base+start+relative+8)..<(base+start+relative+bytes)])
                 guard let ent=(try? PropertyListSerialization.propertyList(from:raw,format:nil)) as? [String:Any] else {throw InspectionFailure(text:"签名权限数据无效")}
                 return ent
             }
@@ -56,12 +56,12 @@ enum WidgetSigningDiagnostics {
     }
     static func bundleEntitlements(_ bundle: Bundle) -> [String:Any]? {
         guard let url=bundle.executableURL,let size=try? url.resourceValues(forKeys:[.fileSizeKey]).fileSize,
-              size <= 32*1024*1024,let data=try? Data(contentsOf:url) else {return nil}
+              size <= 32*1024*1024,let data=try? Data(contentsOf:url,options:.mappedIfSafe) else {return nil}
         return try? entitlements(data)
     }
     static func bundleReport(_ bundle: Bundle) -> String {
         guard let url=bundle.executableURL,let size=try? url.resourceValues(forKeys:[.fileSizeKey]).fileSize,
-              size <= 32*1024*1024,let data=try? Data(contentsOf:url) else {return "包内签名暂不可读取"}
+              size <= 32*1024*1024,let data=try? Data(contentsOf:url,options:.mappedIfSafe) else {return "包内签名暂不可读取"}
         return describe(data,group:SharedVehicleStore.groupIdentifier,bundleID:bundle.bundleIdentifier ?? "")
     }
     static var installedReport: String {
