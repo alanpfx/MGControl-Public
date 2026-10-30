@@ -4,19 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.64（48）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.65（49）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.64) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.65) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
 
-0.64已通过379项测试与两种设备构建，三个IPA已发布。证书重签名后的实际共享访问仍待真机验证。
+0.65已通过379项测试与两种设备构建，三个IPA已发布。证书重签名后的实际共享访问仍待真机验证。
 
-0.64：新增主App与小组件共享组统一匹配，适配重签名改写的共同组；实际授权仍由系统决定，不自动修复错误签名身份。详见[共享组适配说明](docs/WIDGET-GROUP-MATCHING.md)。
+0.65：新增主App与小组件共享组统一匹配，适配重签名改写的共同组；实际授权仍由系统决定，不自动修复错误签名身份。详见[共享组适配说明](docs/WIDGET-GROUP-MATCHING.md)。
 
 0.63已通过369项测试与两种设备构建，三种IPA已发布；自动哨兵尚待实车验证。[使用与测试步骤](docs/LOCK-SENTINEL.md)。
 
@@ -113,3 +113,6 @@ open MGControlPreview.xcodeproj
 这是“部分源码可见、个人非商业使用”许可，不是 MIT、Apache 或其他标准开放源代码许可证。品牌、商标与相关素材权益归各自权利人，协议不授予第三方标识使用权。详见 [源码范围](docs/SOURCE-SCOPE.md)。
 
 文档组织参考了 [MR Linker（上汽车联助手）](https://gitee.com/yangyachao-X/mr-linker) 的项目介绍、安装和使用说明结构，本文针对 MGControl 独立编写；两者系统平台、功能及许可不应混同，不代表代码合作或授权。
+
+
+NFC 与快捷指令设置：[使用说明](docs/NFC快捷指令使用说明.md)。iOS 16+ 原生动作；iOS 15 打开 URL 后确认。当前绑定车辆需单独授权。
