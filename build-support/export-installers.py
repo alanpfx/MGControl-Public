@@ -3,6 +3,8 @@ from pathlib import Path
 import sys,zipfile,plistlib,hashlib,shutil,re,json,os
 source=Path(sys.argv[1]);out=Path(sys.argv[2]);out.mkdir(parents=True,exist_ok=True)
 expected_version=os.environ['EXPECTED_APP_VERSION'];expected_build=os.environ['EXPECTED_APP_BUILD']
+version_record=json.loads((source/'version.json').read_text(encoding='utf-8'))
+assert (str(version_record['marketingVersion']),str(version_record['buildNumber']))==(expected_version,expected_build),'Pinned source version differs from build expectations'
 checks=[]
 for variant in ('widget','app-only'):
  candidates=list((source/'build').glob(f'*-{variant}-unsigned.ipa'))

@@ -19,6 +19,8 @@ quiet() {
 if ! command -v xcodegen >/dev/null; then quiet dependencies brew install xcodegen; fi
 quiet generate python3 scripts/upgrade_v02.py
 quiet configuration python3 scripts/validate_v02.py
+quiet version-consistency python3 scripts/check_version_consistency.py
+quiet version-tests python3 scripts/test_version_gate.py
 quiet encoding python3 scripts/check_source_encoding.py
 quiet project xcodegen generate --spec project-v02.json
 quiet effective-settings bash -c 'xcodebuild -showBuildSettings -json -project MGControl.xcodeproj -alltargets -configuration Release -sdk iphoneos > build-settings.json && python3 scripts/check_v02_settings.py build-settings.json'
