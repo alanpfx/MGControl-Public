@@ -10,6 +10,8 @@
 
 [下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.66) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
+0.66直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.66/MGControl-V0.66-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.66/MGControl-V0.66-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.66/MGControl-V0.66-widget-trollstore-appgroups.ipa)。云端测试及两种编译通过，设备结果按后续反馈记录。
+
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
@@ -18,9 +20,9 @@
 
 0.64起支持主App与小组件共享组统一匹配；已有部分证书设备确认同步成功，巨魔覆盖升级异常仍按设备排查。详见[共享组适配说明](docs/WIDGET-GROUP-MATCHING.md)。
 
-0.63已通过369项测试与两种设备构建，三种IPA已发布；自动哨兵尚待实车验证。[使用与测试步骤](docs/LOCK-SENTINEL.md)。
+0.63已通过369项测试与两种设备构建，三种IPA已发布；后续已获一次锁车后自动开启哨兵的实车成功反馈，当前状态显示问题仍待处理。[使用与测试步骤](docs/LOCK-SENTINEL.md)。
 
-0.63：新增默认关闭的锁车后自动哨兵。需联网、新车况确认上锁及安全码；受理不代表最终开启成功，待实车验证。入口：设置 → 锁车后自动开启哨兵。
+0.63：新增默认关闭的锁车后自动哨兵。需联网、新车况确认上锁及安全码；受理不代表最终开启成功，其他设备仍须实测。入口：设置 → 锁车后自动开启哨兵。
 
 0.62：增加小组件分阶段错误码与安装后包内权限诊断，巨魔专用包改用精确应用标识。iOS15.5巨魔包已获同步成功反馈，其他签名方式需分别核对共享权限；未更改蓝牙及远控协议。
 
@@ -76,7 +78,7 @@ MGControl 使用 SwiftUI 构建，目标是在 iPhone 上集中展示最近车�
 1. 阅读 [免责声明](docs/DISCLAIMER.md)，在 Release 下载合适的 **未签名 IPA**。
 2. 使用自己的合法签名方式安装。首次安装前确认是否能正确签名小组件和 App Groups；不支持时选 `app-only`。
 3. 根据 [安装与使用](docs/INSTALL.md) 使用自己的手机号完成验证登录和车辆确认；本次完整包已内置应用登录配置，不再要求手动导入。项目不会分发任何真实账号、令牌、安全码或钥匙。
-4. 先测试车况和手动操作，再配置蓝牙钥匙；确认手动开关锁成功后保存自动连接设备。
+4. 蓝牙钥匙页选择“设置蓝牙钥匙/继续设置”，按准备、连接和验证推进。已有钥匙复用；用户确认开关锁且车辆执行成功后自动保存连接设备，无需先手动清除旧凭据。
 5. 无感开关锁默认关闭。先在停车、随身携带实体钥匙的情况下单独开启和测试。
 
 ## 部分源码与界面预览
