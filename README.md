@@ -4,19 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.69（54）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.70（55）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.69) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.70) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
-0.69直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.69/MGControl-V0.69-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.69/MGControl-V0.69-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.69/MGControl-V0.69-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+0.70直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.70/MGControl-V0.70-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.70/MGControl-V0.70-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.70/MGControl-V0.70-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
 
-0.69修复 3D 预览：模型与 Babylon 运行时改为按目录引用打包（此前被平铺到 App 根目录，页面永远加载失败），并加一层按文件名回退与 CSP 放行；后备箱按钮从占位改为可用的「解锁后备箱」（`requestUnlockBoot`，仅解锁，待实车验证）；登录失效判定与官方拦截器对齐（HTTP 200 的 14101/14102/14108 也按失效处理），登录页直接说明「官方 App 重新登录会顶掉本机会话」；空调提交侧温度校验从旧的 25–29℃ 改为官方 Lo / 16–30℃ / Hi，与界面一致。
+0.70修好 3D 预览的资源定位（蓝色文件夹在包里是目录，`Bundle.url(forResource:)` 对目录返回 nil，所以页面和模型一直加载失败），并移除页面 CSP、清掉未随包的 Draco/KTX2 解码器配置，失败时直接显示原因；登录会话失效判定改为「只记录不删凭据」：官方 App 重新登录导致的 14101/14102/14108 不再把本机登录和车辆缓存清掉，首页给出说明条与重新登录入口，蓝牙钥匙不受影响；分享账号登录不再清空当前车辆。
 
 0.67新增充电、一键备车与能耗入口；蓝牙仅增加旧配对提示，配置流程与0.66一致。
 
