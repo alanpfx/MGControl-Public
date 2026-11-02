@@ -4,17 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.67（52）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.68（53）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.67) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.68) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
-0.67直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.67/MGControl-V0.67-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.67/MGControl-V0.67-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.67/MGControl-V0.67-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+0.68直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.68/MGControl-V0.68-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.68/MGControl-V0.68-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.68/MGControl-V0.68-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
+
+0.68新增登录账号类型（主账号/分享账号）：主账号凭据单独保存，分享账号只用于蓝牙钥匙配对授权，远程车控仍走主账号 token；同时接入只读登录共存实验、停车照片全屏缩放、哨兵状态标签、Lo/16–30℃/Hi 温度档位与 3D 参考预览（老款模型，默认收起）。充电与备车仍未经实车验证。
 
 0.67新增充电、一键备车与能耗入口；蓝牙仅增加旧配对提示，配置流程与0.66一致。
 
