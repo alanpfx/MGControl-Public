@@ -4,21 +4,23 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.74（61）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.75（65）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.74) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.75) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
-0.74直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.74/MGControl-V0.74-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.74/MGControl-V0.74-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.74/MGControl-V0.74-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+0.75直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.75/MGControl-V0.75-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.75/MGControl-V0.75-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.75/MGControl-V0.75-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
 
+0.75：正式主账号登录切换为MP直接登录。主账号凭证用于网络车况与远控，蓝牙配置可单独选择主账号或登录分享账号，互不覆盖；保留已有离线钥匙。更新后在设置→主账号远程控车→登录/更新主账号远控凭证，短信登录一次主账号切换新通道，无需清除或重领蓝牙钥匙。3D背景跟随界面颜色，悬浮导航增加底部留白。云端测试、编译及三个IPA静态核验通过，逐项实车待测。[测试步骤](docs/0.75测试操作说明.md)。
+
 0.74：修正悬浮导航点击区域和底部留白，更新3D背景，演示后备箱可明确打开/关闭。备车加入预约时间和重复星期；哨兵支持自动执行或开启前询问；设置可开启车控结果本地通知，系统消息可只读查看。Siri复用蓝牙快捷指令。云端测试/编译和三包静态核验通过，真机及本版实车待测。[逐项测试说明](docs/0.74测试操作说明.md)。
 
-已有用户报告0.73的停车照片、计划新增删除、MP锁车，以及官方App重新登录后再次MP锁车成功；该结果限本次账号设备，不代表分享账号授权或长期共存。MP仍为独立实验，不自动接管正式控车。
+已有用户报告0.73的停车照片、计划新增删除、MP锁车，以及官方App重新登录后再次MP锁车成功；该结果限本次账号设备，不代表分享账号授权或长期共存。此段为0.74历史状态；0.75正式入口已切换MP，旧实验仍单独保留作对照。
 
 0.73：3D车型进入首页，增加地面阴影与尾门状态动画；悬浮导航在新系统采用原生玻璃效果，保留底部空间。停车照片外部显示入口和五视角缩略图，点击进入五方位选择、缩放与保存详情。备车可新增、编辑、删除及取消预约；新预约时间仍在官方App配置。使用旧款MG4参考模型，车型外观不代表实车。云端测试与三包核验通过，设备及实车结果待反馈。
 
