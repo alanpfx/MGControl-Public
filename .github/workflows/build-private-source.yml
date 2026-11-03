@@ -26,7 +26,7 @@
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
         "EXPECTED_APP_VERSION": "0.76",
-        "EXPECTED_APP_BUILD": "66"
+        "EXPECTED_APP_BUILD": "69"
       },
       "steps": [
         {
@@ -50,7 +50,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "c934a7e19e675b5bb8afec488b24a370002ca74b",
+            "ref": "79fd52b9690eea19aa684f98c47bd07540ede40a",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
