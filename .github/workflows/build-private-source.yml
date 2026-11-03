@@ -25,8 +25,8 @@
       "timeout-minutes": 40,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
-        "EXPECTED_APP_VERSION": "0.74",
-        "EXPECTED_APP_BUILD": "61"
+        "EXPECTED_APP_VERSION": "0.75",
+        "EXPECTED_APP_BUILD": "62"
       },
       "steps": [
         {
@@ -50,7 +50,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "55d232cdb17731221b65b162029d57ed5827d30d",
+            "ref": "feb591acbc55064a8034663254aa7c71cde240d2",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
