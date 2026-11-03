@@ -4,17 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.71（56）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.72（58）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.71) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.72) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
-0.71直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.71/MGControl-V0.71-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.71/MGControl-V0.71-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.71/MGControl-V0.71-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+0.72直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.72/MGControl-V0.72-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.72/MGControl-V0.72-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.72/MGControl-V0.72-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
+
+0.72新增“设置 → 实验 → MP直接登录 · 独立验证”。用本页短信直接登录并保存独立凭证，先检测C1；登录官方App后回本页直接检测同一凭证得C2，期间不要重新登录或替换凭证。实验仅查询车辆列表和已有车况，不改主登录或蓝牙钥匙；服务器登录可能影响其他客户端会话。登录共存与远控权限尚待验证。
 
 0.71：按车辆保存主账号凭证，统一远控token与请求身份；明确拒绝车况刷新时提示过期并保留界面。修正BLE当前账号授权、3D资源响应与底部导航遮挡；备车和能耗增加异常保护。云端测试/两种编译、三包摘要/权限/兼容性核验通过，实机与实车结果继续按设备记录。保存副本不能恢复服务端已撤销token。
 
