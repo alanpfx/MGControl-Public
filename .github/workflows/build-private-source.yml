@@ -26,7 +26,7 @@
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_16.4.app/Contents/Developer",
         "EXPECTED_APP_VERSION": "0.72",
-        "EXPECTED_APP_BUILD": "57"
+        "EXPECTED_APP_BUILD": "58"
       },
       "steps": [
         {
