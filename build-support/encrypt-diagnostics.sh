@@ -8,7 +8,10 @@ if [ ! -d "$LOGS" ] || [ ! -f "$CERT" ]; then exit 0; fi
 mkdir -p "$ROOT/public-output/diagnostics"
 # No source archive, xcresult or raw diagnostic log is published.
 tar -czf "$ROOT/_private/build-logs.tar.gz" -C "$LOGS" .
+RECIPIENTS=("$CERT")
+EXTRA="$ROOT/public-build/build-support/diagnostics-build66-certificate.pem"
+if [ "${EXPECTED_APP_BUILD:-}" = "66" ] && [ -f "$EXTRA" ]; then RECIPIENTS+=("$EXTRA"); fi
 openssl cms -encrypt -binary -aes-256-cbc -outform DER \
   -in "$ROOT/_private/build-logs.tar.gz" \
-  -out "$ROOT/public-output/diagnostics/build-logs.p7m" "$CERT" >/dev/null 2>&1
+  -out "$ROOT/public-output/diagnostics/build-logs.p7m" "${RECIPIENTS[@]}" >/dev/null 2>&1
 echo "Encrypted diagnostics prepared; the decryption key is not stored in GitHub."
