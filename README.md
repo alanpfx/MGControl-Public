@@ -4,17 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.75（65）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.76（69）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.75) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.76) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
-0.75直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.75/MGControl-V0.75-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.75/MGControl-V0.75-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.75/MGControl-V0.75-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+0.76直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.76/MGControl-V0.76-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.76/MGControl-V0.76-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.76/MGControl-V0.76-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
+
+0.76：修正主账号选择覆盖蓝牙映射、登录按钮重复点击无反馈及车辆列表解析；滚动内容按悬浮导航高度留白。加入2026 MG4参考模型和门窗/尾门动画，改善材质及背景。450项iOS测试0失败，三种IPA包检查通过；新版设备/实车待测。iBeacon辅助默认关闭，必须确认本车广播参数后使用，不保证唤醒成功。[测试步骤](docs/0.76测试操作说明.md) · [如何确认本车iBeacon参数](docs/iBeacon参数确认.md)。
 
 0.75：正式主账号登录切换为MP直接登录。主账号凭证用于网络车况与远控，蓝牙配置可单独选择主账号或登录分享账号，互不覆盖；保留已有离线钥匙。更新后在设置→主账号远程控车→登录/更新主账号远控凭证，短信登录一次主账号切换新通道，无需清除或重领蓝牙钥匙。3D背景跟随界面颜色，悬浮导航增加底部留白。云端测试、编译及三个IPA静态核验通过，逐项实车待测。[测试步骤](docs/0.75测试操作说明.md)。
 
