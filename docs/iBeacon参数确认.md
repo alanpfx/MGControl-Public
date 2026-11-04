@@ -12,3 +12,12 @@ iBeacon UUID、Major、Minor来自设备实际广播，不是VIN、系统配对�
 若只有iPhone，Core Location的区域监测需要先知道目标UUID；常规BLE扫描不能保证发现未知iBeacon。优先用安卓只读扫描，或从经验证的官方配置/车辆广播获取。不要填网上示例UUID。
 
 参考：[Nordic工具](https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-mobile)、[Apple iBeacon接近检测](https://developer.apple.com/documentation/corelocation/determining-the-proximity-to-an-ibeacon-device)。系统调度、权限、蓝牙、低电量及用户强退均可能影响效果，不保证立即唤醒。
+
+
+## 0.77 起的尽力自动填写
+
+首次设置扫描如收到同一 iOS 候选设备两次一致的新鲜 iBeacon 广播，完成车辆认证并保存连接设备后，可自动保存 UUID、Major、Minor。辅助开关仍默认关闭，由用户决定是否启用。更换连接设备会清除前一设备的辅助参数；同一设备已有手动参数会保留。
+
+iOS 不公开蓝牙 MAC，也可能不向 CoreBluetooth 提供 iBeacon 原始厂商数据。因此安卓同一 MAC 的观察不能直接用于 iPhone 地址匹配，自动读取不是所有设备都可用。读不到参数时，继续使用上方的安卓只读核对和手动填写方法。
+
+**已有可用钥匙无需为自动填写而清除或重新领取。** 已填写正确参数的用户直接保留并测试辅助开/关即可。广播只提供连接机会，认证和无感触发条件保持独立。
