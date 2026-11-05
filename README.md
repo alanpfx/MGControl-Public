@@ -4,17 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.77（72）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.78（74）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.77) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.78) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
-0.77直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.77/MGControl-V0.77-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.77/MGControl-V0.77-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.77/MGControl-V0.77-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+0.78直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.78/MGControl-V0.78-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.78/MGControl-V0.78-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.78/MGControl-V0.78-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
+
+0.78：新增默认关闭的持续后台定位增强连接；优化初始强信号误解锁、备车保存反馈、Siri前台切换等待与活动更新队列，设置增加实时活动/灵动岛总开关。导入已确认的模型接缝、固定窗、灯组、天幕与后车标修复。云端测试/编译及三包静态核验通过，设备与实车仍待验证；已有钥匙无需清除或重新领取。增强模式在蓝牙钥匙→无感开关锁设置中开启并保存，需始终允许定位，会增加耗电。
 
 0.77：修正设置保存/暂停/授权反馈及主账号登录入口，手机号隐藏中间四位，精简首页及历史实验入口。iBeacon参数支持尽力自动采集但仍由用户启用；改进2026车模灯组、内饰、玻璃、同色把手、后雨刮和MG标识，移除车牌及牌框。456项iOS测试零失败，三包静态核验通过；真机与实车仍待测试。[测试步骤](docs/0.77测试操作说明.md)。
 
