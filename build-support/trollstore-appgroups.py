@@ -23,7 +23,10 @@ def sections(data):
 release=api('/releases/tags/v'+VERSION)
 name=f'MGControl-V{VERSION}-widget-ready-unsigned.ipa'
 asset=next(a for a in release['assets'] if a['name']==name)
-with urllib.request.urlopen(asset['browser_download_url'],timeout=120) as r:source=r.read(32*1024*1024)
+MAX_IPA_BYTES=64*1024*1024
+assert 0 < asset['size'] <= MAX_IPA_BYTES, 'Installer exceeds bounded download size'
+with urllib.request.urlopen(asset['browser_download_url'],timeout=120) as r:source=r.read(MAX_IPA_BYTES+1)
+assert len(source)==asset['size'] and len(source)<=MAX_IPA_BYTES, 'Incomplete or oversized installer'
 assert 'sha256:'+hashlib.sha256(source).hexdigest()==asset['digest']
 out=Path('appgroups-output');out.mkdir(exist_ok=True)
 sourcepath=out/'input.ipa';sourcepath.write_bytes(source)
