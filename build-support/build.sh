@@ -25,7 +25,10 @@ quiet encoding python3 scripts/check_source_encoding.py
 quiet project xcodegen generate --spec project-v02.json
 quiet effective-settings bash -c 'xcodebuild -showBuildSettings -json -project MGControl.xcodeproj -alltargets -configuration Release -sdk iphoneos > build-settings.json && python3 scripts/check_v02_settings.py build-settings.json'
 SIMULATOR_ID=$(python3 scripts/select_simulator.py 2>"$LOGS/simulator.log")
+quiet simulator-boot python3 "$ROOT/public-build/build-support/boot-simulator.py" "$SIMULATOR_ID"
 quiet tests xcodebuild test -project MGControl.xcodeproj -scheme MGControl -configuration Debug \
+  -parallel-testing-enabled NO -maximum-concurrent-test-simulator-destinations 1 \
+  -test-timeouts-enabled YES -default-test-execution-time-allowance 90 -maximum-test-execution-time-allowance 180 \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -destination-timeout 120 \
   -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
 quiet widget bash scripts/build_v02.sh widget
