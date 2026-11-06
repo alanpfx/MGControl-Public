@@ -4,7 +4,7 @@ User authorized keeping the repository public and withdrawing old resources on 2
 Releases become recoverable drafts. Only public Actions artifacts containing model
 resources or synthetic design previews are deleted; encrypted diagnostics are untouched.
 """
-import io, json, os, re, urllib.request, urllib.error, zipfile
+import io, json, os, re, urllib.request, urllib.error, urllib.parse, zipfile
 from pathlib import Path
 from public_boundary import forbidden_resource
 
@@ -18,6 +18,16 @@ report = {'policyDate':'2026-11-06', 'releases':[], 'artifacts':[], 'historyRewr
           'releaseAssetsDeleted':False, 'externalCopiesRecalled':False}
 out = Path('privacy-output'); out.mkdir(exist_ok=True)
 
+class DownloadRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        target = super().redirect_request(req, fp, code, msg, headers, newurl)
+        if target is not None and urllib.parse.urlsplit(req.full_url).netloc != urllib.parse.urlsplit(newurl).netloc:
+            assert urllib.parse.urlsplit(newurl).scheme == 'https'
+            target.remove_header('Authorization')
+        return target
+
+downloads = urllib.request.build_opener(DownloadRedirect())
+
 def save():
     (out/'withdrawal-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf8')
 
@@ -26,7 +36,7 @@ def request(path, method='GET', obj=None):
     data = None if obj is None else json.dumps(obj).encode()
     req = urllib.request.Request(url, data=data, method=method, headers={'Authorization':'Bearer '+TOKEN,
         'Accept':'application/vnd.github+json', 'Content-Type':'application/json', 'User-Agent':'MGControl-resource-withdrawal'})
-    with urllib.request.urlopen(req, timeout=120) as response:
+    with downloads.open(req, timeout=120) as response:
         if response.status == 204:
             return None
         return json.load(response)
@@ -62,7 +72,7 @@ for artifact in pages('/actions/artifacts', 'artifacts'):
         continue
     assert 0 < artifact['size_in_bytes'] <= 160*1024*1024, 'Artifact download bound exceeded'
     req=urllib.request.Request(artifact['archive_download_url'], headers={'Authorization':'Bearer '+TOKEN, 'User-Agent':'MGControl-resource-withdrawal'})
-    with urllib.request.urlopen(req, timeout=120) as response:
+    with downloads.open(req, timeout=120) as response:
         payload=response.read(160*1024*1024+1)
     assert len(payload)<=160*1024*1024
     protected='widget-previews' in name or 'DesignWorkbench' in name

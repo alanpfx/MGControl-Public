@@ -1,4 +1,5 @@
 name: Withdraw legacy protected resources
+# Re-run with cross-host download authentication stripped correctly.
 on:
   push:
     branches: [main]
