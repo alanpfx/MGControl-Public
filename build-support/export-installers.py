@@ -1,3 +1,4 @@
+from public_boundary import check_public_ipa
 from ipa_permissions import normalize_ipa
 from pathlib import Path
 import sys,zipfile,plistlib,hashlib,shutil,re,json,os
@@ -10,6 +11,7 @@ for variant in ('widget','app-only'):
  candidates=list((source/'build').glob(f'*-{variant}-unsigned.ipa'))
  if len(candidates)!=1:raise RuntimeError('Expected one installer for each variant')
  p=candidates[0]
+ check_public_ipa(p)
  with zipfile.ZipFile(p) as z:
   if z.testzip() is not None:raise RuntimeError('Corrupt installer')
   for name in z.namelist():

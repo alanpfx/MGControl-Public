@@ -1,3 +1,4 @@
+from public_boundary import check_public_ipa
 from pathlib import Path
 import os,json,urllib.request,hashlib,zipfile,stat
 from ipa_permissions import normalize_ipa
@@ -16,6 +17,7 @@ for variant,digest in [('widget','74c5e6af3bd80b4b093095d458f7baf13d59ae95db527a
  with urllib.request.urlopen(a['browser_download_url'],timeout=120) as r:data=r.read(32*1024*1024)
  assert hashlib.sha256(data).hexdigest()==digest
  source=out/name;source.write_bytes(data)
+ check_public_ipa(source)
  target=out/name.replace('-ready-unsigned','-trollstore-ready-unsigned')
  normalize_ipa(source,target);source.unlink()
  assets.append(target)

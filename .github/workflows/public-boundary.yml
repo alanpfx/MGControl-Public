@@ -1,0 +1,13 @@
+name: Check public distribution boundary
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - run: python3 build-support/public_boundary.py
+      - run: python3 -m unittest discover -s build-support -p test_public_boundary.py

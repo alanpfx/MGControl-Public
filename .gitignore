@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.ipa
+*.ai
+*.svg
+*.blend
+*.glb
+*.gltf
+*.fbx
+*.obj
+*.usdz
+/MGControl/
+/Shared/
+/Widget/
+/Preview/
+/design-workbench/

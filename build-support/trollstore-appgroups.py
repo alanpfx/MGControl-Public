@@ -1,3 +1,4 @@
+from public_boundary import check_public_ipa
 """macOS-only ad-hoc entitlement preparation for TrollStore, no certificates."""
 from pathlib import Path
 import os,sys,json,zipfile,plistlib,hashlib,struct,subprocess,tempfile,urllib.request,urllib.parse
@@ -30,6 +31,7 @@ assert len(source)==asset['size'] and len(source)<=MAX_IPA_BYTES, 'Incomplete or
 assert 'sha256:'+hashlib.sha256(source).hexdigest()==asset['digest']
 out=Path('appgroups-output');out.mkdir(exist_ok=True)
 sourcepath=out/'input.ipa';sourcepath.write_bytes(source)
+check_public_ipa(sourcepath)
 proof={'version':VERSION,'source_sha256':hashlib.sha256(source).hexdigest(),'group':GROUP,'scope':'TrollStore only; no runtime container verification','bundles':[]}
 with tempfile.TemporaryDirectory() as tmp:
  root=Path(tmp)

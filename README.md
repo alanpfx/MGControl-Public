@@ -8,13 +8,13 @@
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.80) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [公开范围](docs/SOURCE-SCOPE.md) · [版权声明](COPYRIGHT.md)
 
-0.80直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+**资源保密调整中：含 3D 模型的历史安装包正在撤下，暂不提供其公开下载。完整模型版仅作私有交付；无模型公开版通过核验后另行发布，不替换旧版本资产。**
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
-> 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
+> 此仓库仅提供发布文档及经过审查的构建支持。应用 UI 源码、设计原稿、3D 模型及相关制作资源不公开。UI 设计著作权归江牧所有；3D 模型及相关原创源码著作权归作者所有，第三方权利与许可保留。
 
 0.80：缩小悬浮导航并保留整块点击区域与底部滚动留白；无感开关即时保存，信号规则合卡保存；原厂无感方案改二级入口，NFC与Siri说明精简并提供快捷指令入口；修复小组件浅深色同步、前窗重复内框，保留0.78原尾门动画并加入成功回执展示与解锁灯效。正式云端470项单元测试和4项模拟器点击测试零失败，18项Python检查、最终三IPA及本地可信源码归档核验通过。真机、签名后共享容器、桌面宿主及实车仍待验证；不清除或重领已有钥匙。[测试步骤](docs/0.80测试操作说明.md)。
 
@@ -60,7 +60,6 @@
 
 独立原生仿真App，可调系统图标、按钮尺寸、字号、间距、卡片样式、颜色与顺序，并导入/导出JSON设计文件。无需登录，不连接车辆，可与正式App并存。
 
-[工作台0.1.1安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/design-workbench-v0.1.1) · [使用说明](docs/DESIGN-WORKBENCH.md)
 
 首版是参数式编辑，尚无桌面拖拽或自定义图片图标；正式MGControl尚未直接读取此配置，不能宣称已实现自动1:1还原。
 
@@ -109,38 +108,23 @@ MGControl 使用 SwiftUI 构建，目标是在 iPhone 上集中展示最近车�
 4. 蓝牙钥匙页选择“设置蓝牙钥匙/继续设置”，按准备、连接和验证推进。已有钥匙复用；用户确认开关锁且车辆执行成功后自动保存连接设备，无需先手动清除旧凭据。
 5. 无感开关锁默认关闭。先在停车、随身携带实体钥匙的情况下单独开启和测试。
 
-## 部分源码与界面预览
+## 公开内容与版权
 
-```text
-Shared/                         车况显示模型、卡片、主题、实时活动视图、共享缓存
-Widget/                         桌面组件与实时活动展示代码
-MGControl/Views/                 车控卡片、快捷按钮与空调面板的展示组件
-MGControl/Assets.xcassets/       当前图标及车辆展示资源
-Preview/                        仅模拟数据的界面预览入口和展示动作类型
-project-preview.yml             独立预览工程配置
-docs/                           安装、使用、免责声明和源码范围
-```
+本仓库保留安装说明、测试清单、更新日志、发布校验记录与构建支持，不提供可重建完整应用的源码或 UI 预览工程。UI 设计归江牧所有，模型及相关原创源码归作者所有。详见 [版权声明](COPYRIGHT.md) 和 [公开范围](docs/SOURCE-SCOPE.md)。
 
-在 macOS 安装 Xcode 及 XcodeGen 后，在此目录执行：
-
-```sh
-xcodegen generate --spec project-preview.yml
-open MGControlPreview.xcodeproj
-```
-
-选择 iPhone 模拟器运行 `MGControlPreview`。所有按钮仅演示界面，不登录账号、不访问车企服务器、不扫描蓝牙、不操作车辆。源码中的共享组使用示例标识，不能沿用到自己的签名环境。
+模型资源不通过公开 IPA 或公开构建附件分发；完整模型版仅作私有交付。删除当前分支不会抹除历史提交及他人副本，历史资源清理情况单独记录。
 
 ## 反馈与隐私
 
 请通过 [Issues](https://github.com/alanpfx/MGControl-Public/issues) 提供版本号、iPhone/iOS 信息、操作步骤及脱敏诊断。不要公开上传手机号、完整车架号、车辆地址、账号令牌、配对码、数字钥匙、HAR 或系统诊断原包。提交截图前遮挡个人与车辆信息。
 
-定位、车况和远控需要相应服务与账号权限；验证页面、地图/地址解析也可能使用相关服务提供方。请不要把本项目理解为“所有网络请求都不会离开手机”。本次提供的界面预览本身不发出车企网络请求。
+定位、车况和远控需要相应服务与账号权限；验证页面、地图/地址解析也可能使用相关服务提供方。请不要把本项目理解为“所有网络请求都不会离开手机”。
 
 ## 源码、标识及鸣谢
 
 本项目采用自定义的 [MGControl 非商业使用与禁止营利协议](LICENSE)。**严禁营利性和商业性使用**，包括收费分发、付费激活、收费签名/安装/配置服务、广告变现及商业捆绑。个人非商业学习、研究与使用须保留协议、出处及免责声明；修改和分享不得取消原有非商业限制。
 
-这是“部分源码可见、个人非商业使用”许可，不是 MIT、Apache 或其他标准开放源代码许可证。品牌、商标与相关素材权益归各自权利人，协议不授予第三方标识使用权。详见 [源码范围](docs/SOURCE-SCOPE.md)。
+这是自定义个人非商业使用许可，不是 MIT、Apache 或其他标准开放源代码许可证。品牌、商标与相关素材权益归各自权利人，协议不授予第三方标识使用权。详见 [源码范围](docs/SOURCE-SCOPE.md)。
 
 文档组织参考了 [MR Linker（上汽车联助手）](https://gitee.com/yangyachao-X/mr-linker) 的项目介绍、安装和使用说明结构，本文针对 MGControl 独立编写；两者系统平台、功能及许可不应混同，不代表代码合作或授权。
 

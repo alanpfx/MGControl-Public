@@ -1,3 +1,4 @@
+from public_boundary import check_public_ipa
 """Publish verified public-run installers without exposing private source or logs."""
 from ipa_permissions import normalized
 from pathlib import Path
@@ -34,6 +35,7 @@ files=list(RAW.glob('*.ipa'));assert len(files)==2
 sums={line.split()[1]:line.split()[0] for line in (RAW/'SHA256SUMS.txt').read_text().splitlines()}
 version=build=None
 for p in files:
+ check_public_ipa(p)
  assert hashlib.sha256(p.read_bytes()).hexdigest()==sums[p.name]
  with zipfile.ZipFile(p) as z:
   import plistlib
