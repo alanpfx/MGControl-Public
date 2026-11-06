@@ -77,7 +77,7 @@ for variant in ('widget','app-only'):
    assert all(z.read(n)==original.read(n) for n in original.namelist() if n!=resource)
  assets.append((name,dest.read_bytes()))
 checks=''.join(hashlib.sha256(data).hexdigest()+'  '+name+'\n' for name,data in assets)
-assets += [('SHA256SUMS.txt',checks.encode()),('LICENSE.txt',(ROOT/'LICENSE').read_bytes())]
+assets += [('SHA256SUMS.txt',checks.encode()),('LICENSE.txt',(ROOT/'LICENSE').read_bytes()),('COPYRIGHT.txt',(ROOT/'COPYRIGHT.md').read_bytes())]
 
 tag='v'+version
 existing=None
