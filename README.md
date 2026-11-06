@@ -4,17 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.79（77）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.80（80）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
-[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.79) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
+[下载安装包](https://github.com/alanpfx/MGControl-Public/releases/tag/v0.80) · [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [源码范围](docs/SOURCE-SCOPE.md)
 
-0.79直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.79/MGControl-V0.79-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.79/MGControl-V0.79-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.79/MGControl-V0.79-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
+0.80直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-trollstore-appgroups.ipa)。云端构建结果以 Release 说明为准，设备结果按后续反馈记录。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此分支提供的是 **部分源码与可编译的界面预览**。账号、车控接口、蓝牙协议及钥匙认证实现不在此次提供范围。Release 安装包包含已编译功能，但本分支不能重建完整车控安装包。这是独立的发布仓库，不含内部开发分支或历史，可见性由维护者决定。
+
+0.80：缩小悬浮导航并保留整块点击区域与底部滚动留白；无感开关即时保存，信号规则合卡保存；原厂无感方案改二级入口，NFC与Siri说明精简并提供快捷指令入口；修复小组件浅深色同步、前窗重复内框，保留0.78原尾门动画并加入成功回执展示与解锁灯效。正式云端470项单元测试和4项模拟器点击测试零失败，18项Python检查、最终三IPA及本地可信源码归档核验通过。真机、签名后共享容器、桌面宿主及实车仍待验证；不清除或重领已有钥匙。[测试步骤](docs/0.80测试操作说明.md)。
 
 0.79：新增两款按 Illustrator 原稿重建的中号小组件（车辆图片版、简洁版），在设置→中号小组件风格中切换，经典、小号和大号保留。苹方动态文字、原矢量图标和透明车辆图，四个入口为锁车/解锁、鸣笛寻车、空调开关、后备箱，均进入主App确认流程。车辆图版有静态玻璃高光，系统透明/着色模式会改变配色。463项iOS测试零失败，三包静态检查与本地私有源码归档验证通过；真机桌面、运行时共享容器及实车待验证。首页卡片拖拽本版仅完成方案。[测试步骤](docs/0.79测试操作说明.md)。
 
