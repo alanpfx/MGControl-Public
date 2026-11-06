@@ -21,12 +21,12 @@
   "jobs": {
     "build": {
       "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/main' && github.actor == 'alanpfx'",
-      "runs-on": "macos-15-intel",
+      "runs-on": "macos-15",
       "timeout-minutes": 40,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
         "EXPECTED_APP_VERSION": "0.80",
-        "EXPECTED_APP_BUILD": "79"
+        "EXPECTED_APP_BUILD": "80"
       },
       "steps": [
         {
@@ -50,7 +50,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "fc7fa2949db98b473263f2dbd4713e57d4702585",
+            "ref": "d73308e0d15b6a502d8c8a7afc6d8a31fe1aa936",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
