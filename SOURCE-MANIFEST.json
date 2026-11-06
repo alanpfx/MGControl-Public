@@ -5,5 +5,9 @@
   "modelCopyright": "作者及原权利人",
   "uiAndModelSourcePublished": false,
   "publicInstallerPolicy": "preserve compiled UI and runtime models",
-  "historicalRefsCleaned": false
+  "historicalRefsCleaned": true,
+  "cleanedCommitCount": 126,
+  "cleanedRefCount": 30,
+  "externalForksCleaned": false,
+  "githubCachedPrRefsCleaned": false
 }
