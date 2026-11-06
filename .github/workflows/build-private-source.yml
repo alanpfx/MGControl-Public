@@ -25,8 +25,8 @@
       "timeout-minutes": 40,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
-        "EXPECTED_APP_VERSION": "0.79",
-        "EXPECTED_APP_BUILD": "77"
+        "EXPECTED_APP_VERSION": "0.80",
+        "EXPECTED_APP_BUILD": "78"
       },
       "steps": [
         {
@@ -50,7 +50,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "c456eb526dec386cd27f00a17129646774b9a2a1",
+            "ref": "e5aa264f6783ade0fbd403a29064ab5f58c0498b",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
@@ -66,7 +66,7 @@
           "name": "Upload verified unsigned installers",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.79-unsigned",
+            "name": "MGControl-0.80-unsigned",
             "path": "public-output/installers/",
             "if-no-files-found": "error",
             "retention-days": 7
@@ -77,7 +77,7 @@
           "if": "success()",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.79-widget-previews",
+            "name": "MGControl-0.80-widget-previews",
             "path": "_private/source/build/widget-preview/*.png",
             "if-no-files-found": "error",
             "retention-days": 7
@@ -94,7 +94,7 @@
           "if": "always()",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.79-encrypted-diagnostics",
+            "name": "MGControl-0.80-encrypted-diagnostics",
             "path": "public-output/diagnostics/build-logs.p7m",
             "if-no-files-found": "ignore",
             "retention-days": 3
