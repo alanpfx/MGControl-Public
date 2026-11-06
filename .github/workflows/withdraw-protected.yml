@@ -1,5 +1,5 @@
 name: Withdraw legacy protected resources
-# Re-run with cross-host download authentication stripped correctly.
+# Include the separate TrollStore packaging artifacts in the scoped resource audit.
 on:
   push:
     branches: [main]

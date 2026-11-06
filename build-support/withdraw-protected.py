@@ -65,7 +65,7 @@ for release in pages('/releases'):
     print('Withdrew release as recoverable draft:', release['tag_name'])
 
 for artifact in pages('/actions/artifacts', 'artifacts'):
-    if artifact['expired'] or not (artifact['name'].startswith('MGControl-') or artifact['name'].startswith('MGDesignWorkbench')):
+    if artifact['expired'] or not artifact['name'].startswith(('MGControl-', 'MGDesignWorkbench', 'TrollStore-AppGroups')):
         continue
     name=artifact['name']
     if 'encrypted' in name or 'diagnostic' in name or name.startswith('MGControl-privacy-withdrawal'):
