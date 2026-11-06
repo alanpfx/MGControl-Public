@@ -1,14 +1,9 @@
 {
-  "scope": "release-documentation-and-reviewed-build-support-only",
+  "scope": "documentation-and-reviewed-build-support-only",
   "effectiveDate": "2026-11-06",
   "uiDesignCopyright": "江牧",
   "modelCopyright": "作者及原权利人",
-  "excluded": [
-    "UI source and design originals",
-    "3D models, textures, materials, animations and production sources",
-    "vehicle/BLE protocol source",
-    "private diagnostics, captures and credentials"
-  ],
-  "publicInstallerPolicy": "model-free",
+  "uiAndModelSourcePublished": false,
+  "publicInstallerPolicy": "preserve compiled UI and runtime models",
   "historicalRefsCleaned": false
 }

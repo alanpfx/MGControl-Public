@@ -1,0 +1,35 @@
+name: Restore installers and clean protected source history
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/source-privacy.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: mgcontrol-source-history-cleanup
+  cancel-in-progress: false
+jobs:
+  source-privacy:
+    if: github.repository == 'alanpfx/MGControl-Public' && github.actor == 'alanpfx' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Restore original compiled installers without replacing assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 build-support/restore-installers.py
+      - name: Clean authorized source history with atomic ref leases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 build-support/clean-public-history.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: MGControl-source-privacy-report
+          path: privacy-output/*.json
+          retention-days: 30

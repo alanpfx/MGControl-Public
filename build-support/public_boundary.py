@@ -1,9 +1,10 @@
-"""Fail closed before public upload: no UI source, design originals or 3D resources."""
+"""Protect public SOURCE scope; compiled installers retain approved runtime models."""
 from pathlib import Path, PurePosixPath
 import subprocess, sys, zipfile
 
 MODEL_EXTENSIONS = {'.glb', '.gltf', '.blend', '.fbx', '.obj', '.mtl', '.usdz', '.usd', '.usdc', '.usda', '.stl'}
 EDITABLE_EXTENSIONS = {'.ai', '.svg', '.eps', '.psd', '.sketch', '.fig', '.swift', '.xib', '.storyboard'}
+INSTALLER_SOURCE_EXTENSIONS = {'.swift', '.ai', '.blend', '.psd', '.sketch', '.fig', '.h', '.m', '.mm', '.c', '.cpp', '.har', '.chlz', '.pem', '.key'}
 ROOT_FILES = {'.gitignore', 'README.md', 'LICENSE', 'COPYRIGHT.md', 'BUILDING-PRIVATE-SOURCE.md',
               'CHANGELOG.md', 'RELEASE-NOTES.md', 'SOURCE-MANIFEST.json', 'PUBLIC-DISTRIBUTION.json'}
 ALLOWED_ROOTS = {'docs', 'build-support', 'release-manifests', '.github'}
@@ -26,13 +27,9 @@ def check_public_ipa(path):
             raise ValueError('Duplicate installer entries')
         for entry in z.infolist():
             name = entry.filename
-            if forbidden_resource(name):
-                raise ValueError('Protected resource in public installer: ' + name)
-            # Renaming the GLB must not bypass the filename rule.
-            if not entry.is_dir():
-                with z.open(entry) as stream:
-                    if stream.read(4) == b'glTF':
-                        raise ValueError('GLB payload in public installer: ' + name)
+            if PurePosixPath(name).suffix.lower() in INSTALLER_SOURCE_EXTENSIONS:
+                raise ValueError('Source or authoring original in public installer: ' + name)
+            # The author explicitly permits compiled runtime models in public IPAs.
 
 if __name__ == '__main__':
     if len(sys.argv) == 3 and sys.argv[1] == '--ipa':

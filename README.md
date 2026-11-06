@@ -10,7 +10,7 @@
 
 [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [公开范围](docs/SOURCE-SCOPE.md) · [版权声明](COPYRIGHT.md)
 
-**资源保密调整中：含 3D 模型的历史安装包正在撤下，暂不提供其公开下载。完整模型版仅作私有交付；无模型公开版通过核验后另行发布，不替换旧版本资产。**
+0.80直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-trollstore-appgroups.ipa)。安装包保留现有UI与3D模型，源码及设计原稿不公开。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
@@ -112,7 +112,7 @@ MGControl 使用 SwiftUI 构建，目标是在 iPhone 上集中展示最近车�
 
 本仓库保留安装说明、测试清单、更新日志、发布校验记录与构建支持，不提供可重建完整应用的源码或 UI 预览工程。UI 设计归江牧所有，模型及相关原创源码归作者所有。详见 [版权声明](COPYRIGHT.md) 和 [公开范围](docs/SOURCE-SCOPE.md)。
 
-模型资源不通过公开 IPA 或公开构建附件分发；完整模型版仅作私有交付。删除当前分支不会抹除历史提交及他人副本，历史资源清理情况单独记录。
+编译安装包保留现有 UI、3D 模型及功能，可继续公开分发；保密范围是源码、设计原稿和模型制作工程。删除当前分支不会抹除历史提交及他人副本，历史资源清理情况单独记录。
 
 ## 反馈与隐私
 

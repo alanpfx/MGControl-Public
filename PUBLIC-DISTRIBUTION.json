@@ -1,9 +1,10 @@
 {
-  "distribution": "public-model-free",
-  "version": "0.81",
-  "build": 81,
-  "sourcePin": "4171736cb820e2b85b90d2253556ccee1f085fd0",
+  "distribution": "full-featured compiled installers",
+  "version": "0.80",
+  "build": 80,
+  "sourcePin": "d73308e0d15b6a502d8c8a7afc6d8a31fe1aa936",
   "uiSourcePublished": false,
-  "modelResourcesPublished": false,
-  "privateFullModelBuild": "local/private delivery only"
+  "modelSourcePublished": false,
+  "compiledModelResourcesIncluded": true,
+  "modelFreeCandidateCancelled": true
 }

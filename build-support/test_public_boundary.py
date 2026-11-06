@@ -12,9 +12,9 @@ class PublicBoundaryTests(unittest.TestCase):
             with self.subTest(path=path), self.assertRaises(ValueError):
                 check_source_paths([path])
 
-    def test_reject_model_folder_and_disguised_glb(self):
-        for name, payload in [('Payload/MGControl.app/Vehicle3D/texture.png', b'PNG'),
-                              ('Payload/MGControl.app/cache.dat', b'glTF' + bytes(20))]:
+    def test_reject_editable_originals_in_installer(self):
+        for name, payload in [('Payload/MGControl.app/design.ai', b'PDF'),
+                              ('Payload/MGControl.app/model.blend', b'BLENDER')]:
             with tempfile.TemporaryDirectory() as tmp:
                 ipa = Path(tmp) / 'sample.ipa'
                 with zipfile.ZipFile(ipa, 'w') as z:
@@ -28,6 +28,7 @@ class PublicBoundaryTests(unittest.TestCase):
             with zipfile.ZipFile(ipa, 'w') as z:
                 z.writestr('Payload/MGControl.app/MGControl', b'\xcf\xfa\xed\xfe')
                 z.writestr('Payload/MGControl.app/Assets.car', b'compiled assets')
+                z.writestr('Payload/MGControl.app/Vehicle3D/MG4_2026/model.glb', b'glTF'+bytes(20))
             check_public_ipa(ipa)
 
 if __name__ == '__main__':
