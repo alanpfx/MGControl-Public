@@ -28,7 +28,7 @@
       "timeout-minutes": 40,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
-        "REVIEW_SOURCE_SHA": "9624f93a3b2dafbdf7281ffe9e89f085822b442d"
+        "REVIEW_SOURCE_SHA": "5153d65d1a9bc64695183a974465448c801daadd"
       },
       "steps": [
         {
