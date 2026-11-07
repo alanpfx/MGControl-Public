@@ -4,17 +4,19 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.80（80）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.81（83）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
 
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
 [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [公开范围](docs/SOURCE-SCOPE.md) · [版权声明](COPYRIGHT.md)
 
-0.80直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.80/MGControl-V0.80-widget-trollstore-appgroups.ipa)。安装包保留现有UI与3D模型，源码及设计原稿不公开。
+0.81直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.81/MGControl-V0.81-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.81/MGControl-V0.81-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.81/MGControl-V0.81-widget-trollstore-appgroups.ipa)。安装包保留现有UI与3D模型，源码及设计原稿不公开。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此仓库仅提供发布文档及经过审查的构建支持。应用 UI 源码、设计原稿、3D 模型及相关制作资源不公开。UI 设计著作权归江牧所有；3D 模型及相关原创源码著作权归作者所有，第三方权利与许可保留。
+
+0.81：整合首页五个矢量入口、统一可取消车控弹窗、蓝牙灰蓝状态入口、空调实际状态切换、iOS26原生玻璃导航与旧系统尾部留白；新增小组件独立风格与六车色适配、离线钥匙故障容错、离车保电关闭及哨兵开启识别/延迟确认。导入最新2026模型，补三角玻璃、低机位、珠光清漆、垂直投影与统一悬浮顶，保留原版尾门联动。正式510项单元+8项UI交互零失败，18项Python、模型本地8项独立检查/10项WebGL、最终三IPA与可信本地归档核验通过；设备安装、真实Widget宿主、iOS WebGL/GPU及实车闭环仍待验收。卡片自由拖拽未包含，能耗仍未接通，已有钥匙不清除不重领。[测试步骤](docs/0.81测试操作说明.md)。
 
 0.80：缩小悬浮导航并保留整块点击区域与底部滚动留白；无感开关即时保存，信号规则合卡保存；原厂无感方案改二级入口，NFC与Siri说明精简并提供快捷指令入口；修复小组件浅深色同步、前窗重复内框，保留0.78原尾门动画并加入成功回执展示与解锁灯效。正式云端470项单元测试和4项模拟器点击测试零失败，18项Python检查、最终三IPA及本地可信源码归档核验通过。真机、签名后共享容器、桌面宿主及实车仍待验证；不清除或重领已有钥匙。[测试步骤](docs/0.80测试操作说明.md)。
 
@@ -80,7 +82,7 @@ MGControl 使用 SwiftUI 构建，目标是在 iPhone 上集中展示最近车�
 | 无感控制 | 近车解锁、离车锁车分别开关；信号阈值、持续时长、动作冷却可调，属于实验功能 |
 | 自动刷新 | 可设置 10 分钟、30 分钟、1 小时、2 小时、3 小时、4 小时、5 小时、6 小时；后台执行时点由 iOS 调度 |
 | 系统展示 | 桌面小组件；iOS 16.2 及以上支持实时活动，灵动岛还需兼容机型；显示最近同步的数据和明确的状态时间 |
-| 个性化 | 系统/浅色/深色外观、车辆颜色、自定义车名；小组件跟随系统外观 |
+| 个性化 | 系统/浅色/深色外观、车辆颜色、自定义车名；小组件跟随App外观或系统模式 |
 
 0.60 已通过354项自动化测试及两种安装包构建，最低系统保持iOS15.0。首次配对采用最多15秒的完整车架号识别记录、3秒内广播和固定1秒确认窗口，减少间歇名称造成的重复等待；保留多候选冲突拦截与手动扫描回退。新识别逻辑仍需实车复测，特定新设备的认证失败也需单独验证。保留0.58的系统蓝牙恢复、锁车后车况核验及默认关闭的位置辅助。
 
