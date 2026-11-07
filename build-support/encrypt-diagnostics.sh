@@ -10,7 +10,9 @@ mkdir -p "$ROOT/public-output/diagnostics"
 tar -czf "$ROOT/_private/build-logs.tar.gz" -C "$LOGS" .
 RECIPIENTS=("$CERT")
 EXTRA="$ROOT/public-build/build-support/diagnostics-build66-certificate.pem"
-if [ "${EXPECTED_APP_BUILD:-}" = "80" ] && [ -f "$EXTRA" ]; then RECIPIENTS+=("$EXTRA"); fi
+case "${EXPECTED_APP_BUILD:-}" in
+  80|83) if [ -f "$EXTRA" ]; then RECIPIENTS+=("$EXTRA"); fi ;;
+esac
 openssl cms -encrypt -binary -aes-256-cbc -outform DER \
   -in "$ROOT/_private/build-logs.tar.gz" \
   -out "$ROOT/public-output/diagnostics/build-logs.p7m" "${RECIPIENTS[@]}" >/dev/null 2>&1

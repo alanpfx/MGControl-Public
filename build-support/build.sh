@@ -21,6 +21,7 @@ quiet generate python3 scripts/upgrade_v02.py
 quiet configuration python3 scripts/validate_v02.py
 quiet version-consistency python3 scripts/check_version_consistency.py
 quiet version-tests python3 scripts/test_version_gate.py
+quiet build-support-tests python3 -m unittest discover -s scripts -p 'test_*.py' -q
 quiet encoding python3 scripts/check_source_encoding.py
 quiet project xcodegen generate --spec project-v02.json
 quiet effective-settings bash -c 'xcodebuild -showBuildSettings -json -project MGControl.xcodeproj -alltargets -configuration Release -sdk iphoneos > build-settings.json && python3 scripts/check_v02_settings.py build-settings.json'
@@ -31,6 +32,7 @@ quiet tests xcodebuild test -project MGControl.xcodeproj -scheme MGControl -conf
   -test-timeouts-enabled YES -default-test-execution-time-allowance 90 -maximum-test-execution-time-allowance 180 \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -destination-timeout 120 \
   -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
+quiet previews xcrun xcresulttool export attachments --path build/Tests.xcresult --output-path "$LOGS/previews"
 quiet widget bash scripts/build_v02.sh widget
 quiet app-project xcodegen generate --spec project-app-only.json
 quiet app-only bash scripts/build_v02.sh app-only
