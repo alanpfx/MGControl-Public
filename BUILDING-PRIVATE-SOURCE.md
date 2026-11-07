@@ -10,7 +10,17 @@
 4. 将凭证直接保存到 **MGControl-Public** → Settings → Secrets and variables → Actions → New repository secret，名称为 `MGCONTROL_SOURCE_TOKEN`。不要发送到聊天、提交到源码或放入 Variables。
 5. 本仓库 Actions → Build MGControl from private source → Run workflow，选择 `main` 并运行。
 
-工作流固定读取经过审查的私有源码提交 `84be10de4e02b654276d3db67d5d8e747443ca7a`（0.57 / 41），只允许所有者在本仓库 main 手动触发，或由所有者更新此工作流文件触发。更新版本时须审查并修改固定提交与版本检查。没有 pull_request / pull_request_target / 外部代码触发入口。
+正式构建以 `.github/workflows/build-private-source.yml` 中经过审查的完整私有提交 SHA 与版本检查为准；测试以 `review-private-source.yml` 中的固定 SHA 为准。只允许所有者在本仓库 main 手动触发，或由所有者更新相应工作流/辅助文件触发。更新版本时须审查固定提交与版本检查。没有 pull_request / pull_request_target / 外部代码取得私有源码凭证的触发入口。
+
+## 所有构建和测试统一在 public 执行
+
+- `MGControl-Public` 承担正式测试、IPA 构建、发布、TrollStore 制包和临时原生回归。使用标准 `macos-15`、`ubuntu-latest` 运行器，不使用收费的大型运行器。
+- 私有 `MGControl` 仅保存源码与固定提交，不承担 Actions 执行；停用其仓库 Actions，避免旧分支的工作流再次触发私有计费任务。读取私有 Git 内容不依赖私库 Actions 开关。
+- `Review private MGControl source` 只做原生单元/交互检查，不生成 IPA、不创建 Release，也不触发正式发布链。其私有源码 pin 可以是尚未发布的审查分支。
+- 公共审查结果仅包含版本、固定源码 SHA 和测试数量。详细日志与原生预览使用现有公开证书加密为 `.p7m`，保留 3 天；私钥、解密结果、源码压缩包和原始 xcresult 不上传。
+- 当前原生审查使用已交付模型作为测试基线，尚未交付的车模候选仍须单独完成设备/GPU验证，不能用原生测试结果代替。
+
+GitHub 的标准托管运行器在公开仓库适用[公开运行分钟免费规则](https://docs.github.com/en/actions/concepts/billing-and-usage)；[大型运行器另行计费](https://docs.github.com/en/actions/concepts/runners/larger-runners)。本流程不调整账户账单或消费限额。
 
 ## 产物与日志
 
