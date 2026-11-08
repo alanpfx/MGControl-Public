@@ -10,11 +10,13 @@
 
 [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [公开范围](docs/SOURCE-SCOPE.md) · [版权声明](COPYRIGHT.md)
 
-0.81直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.81/MGControl-V0.81-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.81/MGControl-V0.81-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.81/MGControl-V0.81-widget-trollstore-appgroups.ipa)。安装包保留现有UI与3D模型，源码及设计原稿不公开。
+0.83直接下载：[带小组件IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.83/MGControl-V0.83-widget-ready-unsigned.ipa) · [纯App IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.83/MGControl-V0.83-app-only-ready-unsigned.ipa) · [TrollStore专用IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.83/MGControl-V0.83-widget-trollstore-appgroups.ipa)。安装包保留现有UI与3D模型，源码及设计原稿不公开。
 
 > 本项目不是 MG Live 官方客户端，与上汽、名爵及官方车联网服务不存在官方隶属或背书关系。请先阅读免责声明，始终保留官方 App 和实体钥匙。
 >
 > 此仓库仅提供发布文档及经过审查的构建支持。应用 UI 源码、设计原稿、3D 模型及相关制作资源不公开。UI 设计著作权归孔乙己KongYJen所有；3D 模型及相关原创源码著作权归作者所有，第三方权利与许可保留。
+
+0.83：原厂无感按官方两条线路实现（优先云端下发的广播UUID，缺失时用钥匙里的bleMac本地推算），推算规则以实车广播校准，与安卓扫描值逐字符一致；修复首页四个快捷入口和空调控制在缺少安全码时"点了没反应"的问题，按钮保持可点并给出明确提示，禁用态同时显著变淡。正式云端测试、三类IPA核验与本地可信归档仍按流程复核；真机安装、Widget宿主、iOS15启动与实车闭环待验收。[测试步骤](docs/0.83测试操作说明.md)。
 
 0.81：整合首页五个矢量入口、统一可取消车控弹窗、蓝牙灰蓝状态入口、空调实际状态切换、iOS26原生玻璃导航与旧系统尾部留白；新增小组件独立风格与六车色适配、离线钥匙故障容错、离车保电关闭及哨兵开启识别/延迟确认。导入最新2026模型，补三角玻璃、低机位、珠光清漆、垂直投影与统一悬浮顶，保留原版尾门联动。正式510项单元+8项UI交互零失败，18项Python、模型本地8项独立检查/10项WebGL、最终三IPA与可信本地归档核验通过；设备安装、真实Widget宿主、iOS WebGL/GPU及实车闭环仍待验收。卡片自由拖拽未包含，能耗仍未接通，已有钥匙不清除不重领。[测试步骤](docs/0.81测试操作说明.md)。
 
