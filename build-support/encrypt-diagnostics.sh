@@ -11,7 +11,7 @@ tar -czf "$ROOT/_private/build-logs.tar.gz" -C "$LOGS" .
 RECIPIENTS=("$CERT")
 EXTRA="$ROOT/public-build/build-support/diagnostics-build66-certificate.pem"
 case "${EXPECTED_APP_BUILD:-}" in
-  80|83|84|85|86|87|88|89|90|91) if [ -f "$EXTRA" ]; then RECIPIENTS+=("$EXTRA"); fi ;;
+  80|83|84|85|86|87|88|89|90|91|92) if [ -f "$EXTRA" ]; then RECIPIENTS+=("$EXTRA"); fi ;;
 esac
 openssl cms -encrypt -binary -aes-256-cbc -outform DER \
   -in "$ROOT/_private/build-logs.tar.gz" \
