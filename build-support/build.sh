@@ -27,12 +27,20 @@ quiet project xcodegen generate --spec project-v02.json
 quiet effective-settings bash -c 'xcodebuild -showBuildSettings -json -project MGControl.xcodeproj -alltargets -configuration Release -sdk iphoneos > build-settings.json && python3 scripts/check_v02_settings.py build-settings.json'
 SIMULATOR_ID=$(python3 scripts/select_simulator.py 2>"$LOGS/simulator.log")
 quiet simulator-boot python3 "$ROOT/public-build/build-support/boot-simulator.py" "$SIMULATOR_ID"
+# Retain failed native interaction attachments only in encrypted owner diagnostics.
+export_failed_previews() {
+  if [ -d build/Tests.xcresult ]; then
+    xcrun xcresulttool export attachments --path build/Tests.xcresult --output-path "$LOGS/previews" >"$LOGS/previews.log" 2>&1 || true
+  fi
+}
+trap export_failed_previews EXIT
 quiet tests xcodebuild test -project MGControl.xcodeproj -scheme MGControl -configuration Debug \
   -parallel-testing-enabled NO -maximum-concurrent-test-simulator-destinations 1 \
   -test-timeouts-enabled YES -default-test-execution-time-allowance 90 -maximum-test-execution-time-allowance 180 \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -destination-timeout 120 \
   -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
 quiet previews xcrun xcresulttool export attachments --path build/Tests.xcresult --output-path "$LOGS/previews"
+trap - EXIT
 quiet widget bash scripts/build_v02.sh widget
 quiet app-project xcodegen generate --spec project-app-only.json
 quiet app-only bash scripts/build_v02.sh app-only
