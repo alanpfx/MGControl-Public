@@ -29,12 +29,21 @@ quiet project xcodegen generate --spec project-v02.json
 SIMULATOR_ID=$(python3 scripts/select_simulator.py 2>"$LOGS/simulator.log")
 if [[ ! "$SIMULATOR_ID" =~ ^[0-9a-fA-F-]{36}$ ]]; then echo "::error::No valid review simulator."; exit 1; fi
 quiet simulator-boot python3 "$SUPPORT/boot-simulator.py" "$SIMULATOR_ID"
+# Keep failed native interaction screenshots inside encrypted owner diagnostics.
+# The numeric public summary still requires a successful complete test run.
+export_failed_previews() {
+  if [ -d build/Tests.xcresult ]; then
+    xcrun xcresulttool export attachments --path build/Tests.xcresult --output-path "$LOGS/previews" >"$LOGS/previews.log" 2>&1 || true
+  fi
+}
+trap export_failed_previews EXIT
 quiet tests xcodebuild test -project MGControl.xcodeproj -scheme MGControl -configuration Debug \
   -parallel-testing-enabled NO -maximum-concurrent-test-simulator-destinations 1 \
   -test-timeouts-enabled YES -default-test-execution-time-allowance 90 -maximum-test-execution-time-allowance 180 \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -destination-timeout 120 \
   -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
 quiet previews xcrun xcresulttool export attachments --path build/Tests.xcresult --output-path "$LOGS/previews"
+trap - EXIT
 quiet summary python3 "$SUPPORT/review-results.py" summary --version-file version.json --log "$LOGS/tests.log" \
   --source-sha "$REVIEW_SOURCE_SHA" --output "$ROOT/public-output/review/summary.json"
 echo "Native unit and UI checks passed. No IPA or release was generated."
