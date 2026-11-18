@@ -42,7 +42,5 @@ quiet tests xcodebuild test -project MGControl.xcodeproj -scheme MGControl -conf
 quiet previews xcrun xcresulttool export attachments --path build/Tests.xcresult --output-path "$LOGS/previews"
 trap - EXIT
 quiet widget bash scripts/build_v02.sh widget
-quiet app-project xcodegen generate --spec project-app-only.json
-quiet app-only bash scripts/build_v02.sh app-only
 quiet export python3 "$ROOT/public-build/build-support/export-installers.py" "$SOURCE" "$ROOT/public-output/installers"
-echo "Tests and both device builds passed; unsigned installers are ready."
+echo "Tests and widget device build passed; the main installer is ready for ordinary signing and TrollStore packaging."

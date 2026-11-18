@@ -31,7 +31,12 @@ workflow_path='/contents/.github/workflows/build-private-source.yml'
 assert api(workflow_path+'?ref='+run['head_sha'])['sha']==api(workflow_path)['sha'],'Build source pin was superseded; wait for the current build'
 
 
-files=list(RAW.glob('*.ipa'));assert len(files)==2
+manifest_path=RAW/'installer-variants.json'
+manifest=json.loads(manifest_path.read_text(encoding='utf8')) if manifest_path.exists() else None
+# New builds contain the main/widget package only. Retain exact legacy replay for old successful builds.
+variants=('widget',) if manifest is not None else ('widget','app-only')
+if manifest is not None:assert manifest['variants']==['widget']
+files=list(RAW.glob('*.ipa'));assert len(files)==len(variants)
 sums={line.split()[1]:line.split()[0] for line in (RAW/'SHA256SUMS.txt').read_text().splitlines()}
 version=build=None
 for p in files:
@@ -48,6 +53,8 @@ for p in files:
   if version is None:version,build=v,b
   assert (version,build)==(v,b) and meta['MinimumOSVersion']=='15.0'
   assert not any(n.endswith('/embedded.mobileprovision') or '/_CodeSignature/' in n for n in z.namelist())
+assert set(p.name for p in files)=={f'MGControl-V{version}-{v}-unsigned.ipa' for v in variants}
+if manifest is not None:assert (manifest['version'],str(manifest['build']))==(version,build)
 notes=(ROOT/'RELEASE-NOTES.md').read_text(encoding='utf8')
 assert re.match(r'# MGControl '+re.escape(version)+r'（'+re.escape(build)+r'）',notes),'Prepare matching public release notes before building'
 changelog=(ROOT/'CHANGELOG.md').read_text(encoding='utf8')
@@ -64,7 +71,7 @@ c=json.loads(configuration);assert set(c)=={'accountSigningKey','vehicleSigningK
 assert all(isinstance(v,str) and 1<=len(v)<=1024 for v in c.values())
 
 assets=[]
-for variant in ('widget','app-only'):
+for variant in variants:
  p=next(p for p in files if p.name.endswith('-'+variant+'-unsigned.ipa'))
  name=f'MGControl-V{version}-{variant}-ready-unsigned.ipa';dest=OUT/name
  with zipfile.ZipFile(p) as src,zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED) as dst:
@@ -120,4 +127,4 @@ except urllib.error.HTTPError as e:
 payload={'message':f'Record published installers for {tag}','content':base64.b64encode((json.dumps(proof,ensure_ascii=False,indent=2)+'\n').encode()).decode(),'branch':'main'}
 if current:payload['sha']=current['sha']
 api('/contents/'+proof_path,'PUT',payload)
-print('Published '+release['html_url']+' with two verified installers, checksums and noncommercial license.')
+print('Published '+release['html_url']+' with verified main installer(s), checksums and noncommercial license; TrollStore is packaged separately.')

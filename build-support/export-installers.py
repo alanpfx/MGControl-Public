@@ -7,7 +7,7 @@ expected_version=os.environ['EXPECTED_APP_VERSION'];expected_build=os.environ['E
 version_record=json.loads((source/'version.json').read_text(encoding='utf-8'))
 assert (str(version_record['marketingVersion']),str(version_record['buildNumber']))==(expected_version,expected_build),'Pinned source version differs from build expectations'
 checks=[]
-for variant in ('widget','app-only'):
+for variant in ('widget',):
  candidates=list((source/'build').glob(f'*-{variant}-unsigned.ipa'))
  if len(candidates)!=1:raise RuntimeError('Expected one installer for each variant')
  p=candidates[0]
@@ -25,4 +25,5 @@ for variant in ('widget','app-only'):
  normalize_ipa(p,out/name)
  checks.append(hashlib.sha256((out/name).read_bytes()).hexdigest()+'  '+name)
 (out/'SHA256SUMS.txt').write_text('\n'.join(checks)+'\n',encoding='utf8')
-print('Exported only two verified installers and checksums.')
+(out/'installer-variants.json').write_text(json.dumps({'version':expected_version,'build':expected_build,'variants':['widget']},indent=2)+'\n',encoding='utf8')
+print('Exported the verified widget/main installer and checksums; app-only is no longer built.')
