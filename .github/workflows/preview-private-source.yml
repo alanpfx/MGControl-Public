@@ -1,0 +1,94 @@
+{
+  "name": "Render private native appearance previews",
+  "on": {
+    "workflow_dispatch": {},
+    "push": {
+      "branches": [
+        "main"
+      ],
+      "paths": [
+        ".github/workflows/preview-private-source.yml",
+        "build-support/preview.sh",
+        "build-support/preview-results.py"
+      ]
+    }
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "concurrency": {
+    "group": "mgcontrol-private-native-preview",
+    "cancel-in-progress": true
+  },
+  "jobs": {
+    "review": {
+      "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/main' && github.actor == 'alanpfx'",
+      "runs-on": "macos-15",
+      "timeout-minutes": 30,
+      "env": {
+        "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
+        "REVIEW_SOURCE_SHA": "1fe95cc1c660e1ba0d4b51de4cbfb19a9871f2a1"
+      },
+      "steps": [
+        {
+          "name": "Check private source credential",
+          "env": {
+            "SOURCE_TOKEN": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}"
+          },
+          "shell": "bash",
+          "run": "if [ -z \"$SOURCE_TOKEN\" ]; then echo \"::error::Configure MGCONTROL_SOURCE_TOKEN with read-only Contents access to MGControl.\"; exit 1; fi"
+        },
+        {
+          "name": "Read reviewed public support",
+          "uses": "actions/checkout@v6",
+          "with": {
+            "persist-credentials": false,
+            "path": "public-build"
+          }
+        },
+        {
+          "name": "Read immutable private test source",
+          "uses": "actions/checkout@v6",
+          "with": {
+            "repository": "alanpfx/MGControl",
+            "ref": "${{ env.REVIEW_SOURCE_SHA }}",
+            "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
+            "persist-credentials": false,
+            "path": "_private/source",
+            "fetch-depth": 1
+          }
+        },
+        {
+          "name": "Render focused native appearance previews",
+          "run": "bash public-build/build-support/preview.sh"
+        },
+        {
+          "name": "Upload numeric review result",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "MGControl-native-preview-summary",
+            "path": "public-output/review/summary.json",
+            "if-no-files-found": "error",
+            "retention-days": 3
+          }
+        },
+        {
+          "name": "Encrypt owner diagnostics and native previews",
+          "if": "always()",
+          "run": "bash public-build/build-support/encrypt-diagnostics.sh"
+        },
+        {
+          "name": "Upload encrypted owner evidence",
+          "if": "always()",
+          "uses": "actions/upload-artifact@v4",
+          "with": {
+            "name": "MGControl-native-preview-encrypted",
+            "path": "public-output/diagnostics/build-logs.p7m",
+            "if-no-files-found": "ignore",
+            "retention-days": 3
+          }
+        }
+      ]
+    }
+  }
+}
