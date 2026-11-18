@@ -24,11 +24,11 @@
   "jobs": {
     "review": {
       "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/main' && github.actor == 'alanpfx'",
-      "runs-on": "macos-15-intel",
+      "runs-on": "macos-15",
       "timeout-minutes": 75,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
-        "REVIEW_SOURCE_SHA": "f89a5f8d078cee073a1d7026d880d1d4dac03548"
+        "REVIEW_SOURCE_SHA": "8d510df0407b2536e9a9bc6cd23a259e1c21cfbe"
       },
       "steps": [
         {
