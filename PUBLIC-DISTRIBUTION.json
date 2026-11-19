@@ -1,8 +1,8 @@
 {
   "distribution": "full-featured compiled installers",
-  "version": "0.88.2",
-  "build": 103,
-  "sourcePin": "d39696db787e517ef8bdf720f012cfe2c3d1ca47",
+  "version": "0.88.3",
+  "build": 104,
+  "sourcePin": "672b922cecc0b8f01a452d4971731a0951bcf748",
   "uiSourcePublished": false,
   "modelSourcePublished": false,
   "compiledModelResourcesIncluded": true,
