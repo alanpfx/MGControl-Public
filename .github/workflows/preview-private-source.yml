@@ -22,12 +22,13 @@
   },
   "jobs": {
     "review": {
-      "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/main' && github.actor == 'alanpfx'",
+      "if": "github.repository == 'alanpfx/MGControl-Public' && github.ref == 'refs/heads/review/photo-canvases-20261122' && github.actor == 'alanpfx' && github.event_name == 'workflow_dispatch'",
       "runs-on": "macos-15",
       "timeout-minutes": 30,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
-        "REVIEW_SOURCE_SHA": "1fe95cc1c660e1ba0d4b51de4cbfb19a9871f2a1"
+        "REVIEW_SOURCE_SHA": "df87646d0e9313c225c3b8e48962177059022271",
+        "EXPECTED_APP_BUILD": "108"
       },
       "steps": [
         {

@@ -31,7 +31,7 @@ export_previews() {
 }
 trap export_previews EXIT
 quiet tests xcodebuild test -project MGControl.xcodeproj -scheme MGControl -configuration Debug \
-  -only-testing:MGControlTests/CarLiveActivityTests -only-testing:MGControlTests/ClassicMediumWidgetPreviewTests \
+  -only-testing:MGControlTests/VehicleAppearanceTests \
   -parallel-testing-enabled NO -maximum-concurrent-test-simulator-destinations 1 \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -destination-timeout 120 \
   -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""

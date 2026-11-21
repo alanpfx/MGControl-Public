@@ -6,7 +6,7 @@ assert re.fullmatch('[0-9a-f]{40}',a.source_sha)
 log=Path(a.log).read_text(encoding='utf8',errors='replace')
 assert '** TEST SUCCEEDED **' in log
 suites={}
-for name in ['CarLiveActivityTests','ClassicMediumWidgetPreviewTests']:
+for name in ['VehicleAppearanceTests']:
  matches=list(re.finditer(r"Test Suite '"+name+r"' passed[^\n]*\n\s*Executed (\d+) tests?, with (\d+) failures",log))
  assert matches,'Required appearance suite missing'
  count,failed=map(int,matches[-1].groups());assert count>0 and failed==0
