@@ -50,7 +50,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "a1d960eda3a326ac15466a26de2b4a4e73f36dc2",
+            "ref": "81e1da014d40d50b6687daa2fdc509c923c681dd",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
