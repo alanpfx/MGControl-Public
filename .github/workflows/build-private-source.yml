@@ -25,8 +25,8 @@
       "timeout-minutes": 75,
       "env": {
         "DEVELOPER_DIR": "/Applications/Xcode_26.3.app/Contents/Developer",
-        "EXPECTED_APP_VERSION": "0.89.5",
-        "EXPECTED_APP_BUILD": "111"
+        "EXPECTED_APP_VERSION": "0.89.6",
+        "EXPECTED_APP_BUILD": "112"
       },
       "steps": [
         {
@@ -50,7 +50,7 @@
           "uses": "actions/checkout@v6",
           "with": {
             "repository": "alanpfx/MGControl",
-            "ref": "72cd52f3c868e5a9a88d4182b3f129299d08729c",
+            "ref": "ae8450d38e53f2751421ac62106969482fc15234",
             "token": "${{ secrets.MGCONTROL_SOURCE_TOKEN }}",
             "persist-credentials": false,
             "path": "_private/source",
@@ -66,7 +66,7 @@
           "name": "Upload verified unsigned installers",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.89.5-unsigned",
+            "name": "MGControl-0.89.6-unsigned",
             "path": "public-output/installers/",
             "if-no-files-found": "error",
             "retention-days": 7
@@ -83,7 +83,7 @@
           "if": "always()",
           "uses": "actions/upload-artifact@v4",
           "with": {
-            "name": "MGControl-0.89.5-encrypted-diagnostics",
+            "name": "MGControl-0.89.6-encrypted-diagnostics",
             "path": "public-output/diagnostics/build-logs.p7m",
             "if-no-files-found": "ignore",
             "retention-days": 3
