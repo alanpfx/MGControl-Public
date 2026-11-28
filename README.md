@@ -4,7 +4,9 @@
 
 面向 iPhone 的第三方车辆辅助工具：车况卡片、远程车控、蓝牙数字钥匙、无感开关锁、桌面小组件与实时活动。
 
-**当前测试版：0.89.7（113）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+**当前测试版：0.90（114）｜iOS 15.0 及以上｜主要围绕 2026 款 MG4 测试。**
+
+0.90（114）：灵动岛、锁屏与设置页新增蓝牙快捷操作。无感设置新增信号尺和最近 30 秒曲线，保存阈值后同步更新状态岛。原厂无感开关和实验距离可在监测中设置。增加 iCloud 设置备份，修复小组件快捷模式遇到旧入口时弹出确认。671 项单元测试与 24 项界面测试零失败。覆盖安装与实车待验。[本版使用与验收](docs/0.90测试操作说明.md)。
 
 0.89.7（113）：原厂近车解锁和离车闭锁接为正式开关，iPhone 17 Pro 可按需开启距离实验。修正 iOS 15 卡片上的滚动和系统配对码显示，增加覆盖安装双端版本诊断。664 项单元测试和 24 项界面测试零失败。设备与实车待验。[本版使用与验收](docs/0.89.7测试操作说明.md)。
 
@@ -33,6 +35,8 @@
 **严禁营利性与商业性使用。** 下载安装、阅读或分享前，请先阅读 [非商业使用与禁止营利协议](LICENSE)。
 
 [安装与使用](docs/INSTALL.md) · [免责声明](docs/DISCLAIMER.md) · [更新日志](CHANGELOG.md) · [公开范围](docs/SOURCE-SCOPE.md) · [版权声明](COPYRIGHT.md)
+
+0.90 直接下载：[主程序（带小组件）IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.90/MGControl-V0.90-widget-ready-unsigned.ipa) · [TrollStore 专用 IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.90/MGControl-V0.90-widget-trollstore-appgroups.ipa)。
 
 0.89.7 直接下载：[主程序（带小组件）IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.89.7/MGControl-V0.89.7-widget-ready-unsigned.ipa) · [TrollStore 专用 IPA](https://github.com/alanpfx/MGControl-Public/releases/download/v0.89.7/MGControl-V0.89.7-widget-trollstore-appgroups.ipa)。
 
